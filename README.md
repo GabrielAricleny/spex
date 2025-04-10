@@ -13,7 +13,6 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 ## 📂 Estrutura de Diretórios
 ![Estrutura de Directórios do SPEX](/public/img/estrutura-directorios-spex.png)
 
-## 📂 Estrutura de Diretórios
 /spex  
     │── /database  
         │── /backups # Contém os cópias de segurança da base de dados criadas de forma automática  
