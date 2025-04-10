@@ -11,9 +11,9 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - **Bulma** (Framework CSS)
 
 ## 📂 Estrutura de Diretórios
+![Estrutura de Directórios do SPEX](/public/img/estrutura-directorios-spex.png)
 
 ## 📂 Estrutura de Diretórios
-
 /spex  
     │── /database  
         │── /backups # Contém os cópias de segurança da base de dados criadas de forma automática  
@@ -85,7 +85,6 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 │── README.md # Documentação do projeto  
 │── .env # Configurações de ambiente (credenciais do banco)  
 │── .gitignore # Arquivos a serem ignorados pelo Git  
-
 
 ## 🛠️ Instalação
 1. Clone este repositório: 
