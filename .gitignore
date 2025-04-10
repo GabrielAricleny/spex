@@ -4,7 +4,6 @@ mysql_conn.session.sql
 
 # 📂 Configurações do Editor (VS Code, JetBrains, etc.)
 .vscode/
-.idea/
 
 # 🗑️ Arquivos Temporários e Cache
 *.log
@@ -13,13 +12,7 @@ cache/
 logs/
 tmp/
 
-# 🚀 Dependências do Composer (caso use futuramente)
-vendor/
-
-# 📂 Pastas do Servidor Web Local (caso use XAMPP/WAMP)
-htdocs/
-
 # 📂 Diretórios Específicos do SPEX
+public/css/bulma
+public/css/fontawesome
 public/uploads/  # Evita enviar arquivos de usuários
-storage/         # Armazena logs, cache e arquivos temporários
-node_modules/    # Caso use dependências JS no futuro
