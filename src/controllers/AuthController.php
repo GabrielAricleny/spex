@@ -17,13 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../views/dashboard.php");
             exit();
         } else {
-            echo "Login inválido!";
+            echo "Login inválido--!";
         }
     }
 }
 
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: ../../index.html");
+    header("Location: ../../index.php");
     exit();
 }

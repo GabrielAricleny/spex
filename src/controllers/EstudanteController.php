@@ -13,15 +13,10 @@
         $curso_pretendido = $_POST['curso_pretendido'];
         $senha_estudante = $_POST['senha_estudante'];
 
-        $senha_errada = 1;
-
         if ($senha_estudante === $_POST['senha_estudante_confirmada']) {
             Estudante::cadastrar($nome_estudante, $nome_usuario, $data_nascimento, $telefone_estudante, $email_estudante, $area_formacao, $curso_pretendido, $senha_estudante);
 
             header("Location: /src/views/login.php");
-        }
-        else {
-            $senha_errada = true;
         }
     }
 ?>
