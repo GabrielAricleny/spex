@@ -1,5 +1,11 @@
 USE db_spex;
 
+INSERT INTO usuario (nome_usuario, senha, email, nome_completo, id_nivel_acesso) VALUES
+('mr_somebody', 'admin', 'mr.somebody@example.com', 'Mr. Somebody Administrator', 1);
+
+INSERT INTO administrador (id_usuario, telefone) VALUES
+(1, '000-000-000');
+
 INSERT INTO curso (nome_curso) VALUES
 ('MED Ciências Físicas e Biológicas'),
 ('MED Ciências Económicas e Jurídicas'),
@@ -59,8 +65,8 @@ INSERT INTO curso (nome_curso) VALUES
 ('MESCTI Medicina Dentária'),
 ('MESCTI Oftamologia');
 
-INSERT INTO estudante
-(nome_estudante, data_nasc, telefone, email, area_formacao, curso_pretendido, nome_usuario, senha_estudante)
-VALUES
-('Mr. Somebody', '1990-01-01', '912345678', 'mr.somebody@example.com', 1, 25, 'somebody', 'somebody'),
-('Somebody Else', '2000-12-31', '923456781', 'somebody.else@example.com', 1, 26, 'somebody_else', 'somebody_else');
+--INSERT INTO estudante
+--(nome_estudante, data_nasc, telefone, email, area_formacao, curso_pretendido, nome_usuario, senha_estudante)
+--VALUES
+--('Mr. Somebody', '1990-01-01', '912345678', 'mr.somebody@example.com', 1, 25, 'somebody', 'somebody'),
+--('Somebody Else', '2000-12-31', '923456781', 'somebody.else@example.com', 1, 26, 'somebody_else', 'somebody_else');

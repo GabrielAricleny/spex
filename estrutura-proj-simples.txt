@@ -1,0 +1,104 @@
+.
+├── database
+│   ├── backup.bat
+│   ├── backups
+│   │   └── backup_2025-04-04_20h43m57s.sql
+│   ├── backup.sh
+│   ├── CAMINHO_BACKUP
+│   ├── consultar_estudantes.sql
+│   ├── schema2.sql
+│   ├── schema.sql
+│   └── seeds.sql
+├── docs
+│   ├── diagramas
+│   │   ├── diagrama_arquitectura_sistema
+│   │   ├── diagrama_entidade_relacionamento
+│   │   │   ├── DER-db_spex.bak
+│   │   │   ├── DER-db_spex.mwb
+│   │   │   ├── DER-db_spex.pdf
+│   │   │   └── DER-db_spex.png
+│   │   ├── diagramas_actividades
+│   │   ├── diagramas_casos_uso
+│   │   ├── diagramas_classes
+│   │   └── diagramas_sequencia
+│   ├── estrutura-directorios-spex.md
+│   ├── guia_instalacao.md
+│   ├── guia_instalacao.txt
+│   ├── relatorio_tecnico
+│   │   └── relatorio-tecnico-spex.pdf
+│   ├── requisitos.md
+│   ├── sys.md
+│   └── sys.txt
+├── estrutura-1.txt
+├── estrutura-projecto.txt
+├── public
+│   ├── css
+│   │   ├── estilo.css
+│   │   └── login.css
+│   ├── favicon.ico
+│   ├── index.php
+│   ├── inicio.php
+│   └── js
+│       ├── login.js
+│       └── particulas.js
+├── README.md
+├── src
+│   ├── ajudantes
+│   │   ├── actualizar_senhas.php
+│   │   ├── datetime_helper.php
+│   │   └── recuperar_senha.php
+│   ├── assets
+│   │   ├── fonts
+│   │   └── icons
+│   ├── config
+│   │   ├── autoload.php
+│   │   ├── carregador_ambiente.php
+│   │   ├── conexao_basedados.php
+│   │   ├── configuracao_basedados.php
+│   │   └── Router.php
+│   ├── controladores
+│   │   ├── admin
+│   │   └── utilizador
+│   │       ├── EstudanteControlador.php
+│   │       └── LoginControlador.php
+│   ├── modelos
+│   │   └── EstudanteModel.php
+│   └── visoes
+│       ├── admin
+│       ├── templates
+│       │   ├── cabecalho.php
+│       │   └── rodape.php
+│       └── utilizador
+│           ├── cadastro_estudante.php
+│           ├── dashboard.php
+│           └── login.php
+├── temp_docs
+│   ├── books
+│   │   └── guia-markdown.pdf
+│   ├── chatgpt
+│   │   ├── Estrutura Apresentação Projeto Web.pdf
+│   │   ├── estrutura-directorios-spex-2.png
+│   │   ├── estrutura-directorios-spex.png
+│   │   ├── Estrutura e Validação de Relatório.pdf
+│   │   ├── Incluir imagens no README.pdf
+│   │   ├── Instalar múltiplos Linux HDD.pdf
+│   │   ├── Metodologias de Software.pdf
+│   │   └── Templates HTML PHP Dinâmicos.pdf
+│   └── source-codes
+│       ├── exame_crud.zip
+│       └── spex_crud_exame_sistema.zip
+└── tests
+    ├── integration
+    │   ├── admin
+    │   ├── common
+    │   └── usuario
+    └── unit
+        ├── admin
+        ├── common
+        │   ├── test_db.php
+        │   ├── test_login2.php
+        │   ├── test_login.html
+        │   └── test_login.php
+        └── usuario
+
+42 directories, 60 files

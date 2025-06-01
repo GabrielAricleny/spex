@@ -16,3 +16,4 @@ tmp/
 public/css/bulma
 public/css/fontawesome
 public/uploads/  # Evita enviar arquivos de usuários
+temp_docs/

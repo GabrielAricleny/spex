@@ -1,0 +1,37 @@
+/* Dashboard */
+.menu-label {
+    font-size: 1.1em;
+    color: #363636;
+    font-weight: bold;
+}
+
+.menu-list a.is-active {
+    background-color: #485fc7;
+    color: white;
+}
+
+.tile.is-child.box {
+    border-left: 4px solid;
+}
+
+.has-background-primary-light {
+    border-left-color: #485fc7;
+}
+
+.has-background-info-light {
+    border-left-color: #3e8ed0;
+}
+
+.has-background-success-light {
+    border-left-color: #48c78e;
+}
+
+/* Arena de Exames */
+.exame-card {
+    transition: transform 0.3s;
+}
+
+.exame-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

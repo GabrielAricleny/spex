@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `db_spex`.`estudante` (
   `curso_pretendido` INT NOT NULL,
   `historico` INT,
   `nome_usuario` VARCHAR(45) NOT NULL UNIQUE,
-  `senha_estudante` VARCHAR(16) NOT NULL,
+  `senha_estudante` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id_estudante`),
   UNIQUE INDEX `id_UNIQUE` (`id_estudante` ASC) VISIBLE,
   UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE,
