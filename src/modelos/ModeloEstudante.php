@@ -10,9 +10,12 @@ class ModeloEstudante
 {
     private PDO $pdo;
 
-    public function __construct(PDO $pdo)
+    public function __construct(PDO $conexao)
     {
-        $this->pdo = $pdo;
+        if (!$conexao instanceof PDO) {
+            throw new PDOException("A variável \$conexao não é uma instância de PDO.");
+        }
+        $this->pdo = $conexao;
     }
 
     /**

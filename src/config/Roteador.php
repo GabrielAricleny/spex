@@ -18,11 +18,13 @@ class Roteador
      * @param callable $acao        Função a ser executada quando a rota for chamada
      * @param array    $middlewares Lista de middlewares associados à rota
      */
-    public function adicionar(string $metodo, string $caminho, callable $acao, array $middlewares = []): void
+    public function adicionar(array $metodos, string $caminho, callable $acao, array $middlewares = []): void
     {
-        $metodo = strtoupper($metodo);
-        $this->rotas[$metodo][$caminho] = $acao;
-        $this->middlewares[$caminho] = $middlewares;
+        foreach ($metodos as $metodo) {
+            $metodo = strtoupper($metodo);
+            $this->rotas[$metodo][$caminho] = $acao;
+            $this->middlewares[$caminho] = $middlewares;
+        }
     }
 
     /**

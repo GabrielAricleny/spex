@@ -18,7 +18,8 @@ class ControladorLoginEstudante
         $email = filter_input(INPUT_POST, 'email_estudante', FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha_estudante'] ?? '';
 
-        $modelo = new ModeloEstudante();
+        $conexao = require __DIR__ . '/../../../config/conexao.php';
+        $modelo = new ModeloEstudante($conexao);
         $estudante = $modelo->login($email, $senha);
 
         if ($estudante) {
@@ -32,7 +33,8 @@ class ControladorLoginEstudante
 
     public function terminarSessao(): void
     {
-        unset($_SESSION['estudante']);
-        header('Location: ?rota=inicio');
+        session_destroy();
+        header('Location: ?rota=login_estudante');
+        exit;
     }
 }

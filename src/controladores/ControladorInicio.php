@@ -7,23 +7,29 @@ class ControladorInicio
 {
     public function index(): void
     {
-        session_start();
-
-        // Se já estiver logado
-        if (isset($_SESSION['utilizador'])) {
-            $nivel = $_SESSION['utilizador']['nivel_acesso'] ?? '';
-
-            if ($nivel === 'admin') {
-                header('Location: ?rota=painel_admin');
-                exit;
-            } else {
-                header('Location: ?rota=dashboard_estudante');
-                exit;
-            }
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
 
-        // Se não estiver logado, mostra a página de início pública
-        require __DIR__ . '/../visoes/inicio.php';
+        // Permite voltar ao início mesmo se logado, mas mostra links conforme o nível de acesso
+        $nivel = $_SESSION['utilizador']['nivel_acesso'] ?? null;
+
+        // Define variáveis para a view saber quais links mostrar
+        $links = [
+            'admin' => false,
+            'estudante' => false,
+            'publico' => false,
+        ];
+
+        if ($nivel === 'admin') {
+            $links['admin'] = true;
+        } elseif ($nivel === 'estudante') {
+            $links['estudante'] = true;
+        } else {
+            $links['publico'] = true;
+        }
+
+        // A view pode usar $links para mostrar os links activos
+        include __DIR__ . '/../visoes/inicio.php';
     }
 }
-

@@ -10,17 +10,18 @@ class ControladorNivelAcesso
 {
     private static ?PDO $pdo = null;
 
+    // Inicializa a conexão PDO usando o arquivo de configuração
     private static function inicializarConexao(): void
     {
         if (self::$pdo === null) {
-            require_once __DIR__ . '/../../config/conexao_basedados.php';
-            if (!isset($conexao)) {
-                throw new PDOException("A variável \$conexao não foi definida.");
+            self::$pdo = require __DIR__ . '/../../config/conexao_basedados.php';
+            if (!(self::$pdo instanceof PDO)) {
+                throw new PDOException("A conexão com o banco de dados não foi estabelecida.");
             }
-            self::$pdo = $conexao;
         }
     }
 
+    // Lista todos os níveis de acesso
     public function index(): void
     {
         self::inicializarConexao();
@@ -32,17 +33,18 @@ class ControladorNivelAcesso
         require __DIR__ . '/../../visoes/admin/nivel_acesso/index.php';
     }
 
+    // Cria um novo nível de acesso
     public function criar(): void
     {
         self::inicializarConexao();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nome = trim($_POST['nome_nivel'] ?? '');
+            $descricao = trim($_POST['descricao'] ?? '');
 
-            if ($nome !== '') {
-                $sql = 'INSERT INTO nivel_acesso (nome_nivel) VALUES (:nome)';
+            if ($descricao !== '') {
+                $sql = 'INSERT INTO nivel_acesso (descricao) VALUES (:descricao)';
                 $stmt = self::$pdo->prepare($sql);
-                $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
+                $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
 
                 if ($stmt->execute()) {
                     header('Location: ?rota=admin_nivel_acesso');
@@ -50,12 +52,13 @@ class ControladorNivelAcesso
                 }
             }
 
-            $erro = 'O nome do nível de acesso é obrigatório.';
+            $erro = 'A descrição do nível de acesso é obrigatória.';
         }
 
         require __DIR__ . '/../../visoes/admin/nivel_acesso/formulario.php';
     }
 
+    // Edita um nível de acesso existente
     public function editar(): void
     {
         self::inicializarConexao();
@@ -81,12 +84,12 @@ class ControladorNivelAcesso
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nome = trim($_POST['nome_nivel'] ?? '');
+            $descricao = trim($_POST['descricao'] ?? '');
 
-            if ($nome !== '') {
-                $sql = 'UPDATE nivel_acesso SET nome_nivel = :nome WHERE id_nivel = :id';
+            if ($descricao !== '') {
+                $sql = 'UPDATE nivel_acesso SET descricao = :descricao WHERE id_nivel = :id';
                 $stmt = self::$pdo->prepare($sql);
-                $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
+                $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
@@ -95,12 +98,13 @@ class ControladorNivelAcesso
                 }
             }
 
-            $erro = 'O nome do nível de acesso é obrigatório.';
+            $erro = 'A descrição do nível de acesso é obrigatória.';
         }
 
         require __DIR__ . '/../../visoes/admin/nivel_acesso/formulario.php';
     }
 
+    // Remove um nível de acesso
     public function eliminar(): void
     {
         self::inicializarConexao();
@@ -120,5 +124,24 @@ class ControladorNivelAcesso
 
         header('Location: ?rota=admin_nivel_acesso');
         exit;
+    }
+
+    // Roteia as ações CRUD
+    public function crud(): void
+    {
+        $acao = $_GET['acao'] ?? 'index';
+        switch ($acao) {
+            case 'criar':
+                $this->criar();
+                break;
+            case 'editar':
+                $this->editar();
+                break;
+            case 'eliminar':
+                $this->eliminar();
+                break;
+            default:
+                $this->index();
+        }
     }
 }

@@ -11,11 +11,16 @@ function carregarVariaveisAmbiente($ficheiro = __DIR__ . '/../../.env')
 
     $linhas = file($ficheiro, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($linhas as $linha) {
-        if (strpos(trim($linha), '#') === 0) {
+        $linha = trim($linha);
+        if ($linha === '' || strpos($linha, '#') === 0) {
             continue;
         }
-
+        if (strpos($linha, '=') === false) {
+            continue;
+        }
         list($chave, $valor) = explode('=', $linha, 2);
+        $chave = trim($chave);
+        $valor = trim($valor);
         putenv("$chave=$valor");
         $_ENV[$chave] = $valor;
         $_SERVER[$chave] = $valor;

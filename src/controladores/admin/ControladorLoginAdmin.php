@@ -40,7 +40,7 @@ class ControladorLoginAdmin
         }
 
         $_SESSION['erro_login'] = 'Email ou senha inválidos.';
-        header('Location: ?rota=login_admin');
+        include __DIR__ . '/../../visoes/admin/login_admin.php';
         exit;
     }
 
@@ -49,7 +49,7 @@ class ControladorLoginAdmin
      */  
     public function mostrarFormulario(): void
     {
-        require __DIR__ . '/../../visoes/admin/login_admin.php';
+        include __DIR__ . '/../../visoes/admin/login_admin.php';
     }
 
     /**
@@ -57,7 +57,6 @@ class ControladorLoginAdmin
      */
     public function terminarSessao(): void
     {
-        session_unset();
         session_destroy();
         header('Location: ?rota=login_admin');
         exit;

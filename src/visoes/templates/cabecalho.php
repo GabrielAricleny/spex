@@ -70,7 +70,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
             <div class="navbar-end">
                 <?php if ($utilizadorLogado): ?>
                     <div class="navbar-item">
-                        <span>Olá, <strong class="nome-utilizador"><?= htmlspecialchars($nomeUtilizador) ?></strong></span>
+                        <span>Olá, <strong class="nome-utilizador" style="color: orange;"><?= htmlspecialchars($nomeUtilizador) ?></strong></span>
                     </div>
                     <div class="navbar-item">
                         <?php if ($nivelAcesso === 'admin'): ?>
@@ -102,4 +102,3 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
         </div>
     </nav>
 </header>
-

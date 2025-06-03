@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . '/carregador_ambiente.php';
 
-define('BD_SERVIDOR', getenv('DB_SERVIDOR')); 
-define('BD_PORTA', getenv('DB_PORTA') ?: '3306');
-define('BD_BASEDADOS', getenv('DB_BASEDADOS'));
-define('BD_USUARIO', getenv('DB_USUARIO'));
-define('BD_SENHA', getenv('DB_SENHA'));
+define('BD_SERVIDOR', getenv('BD_SERVIDOR')); 
+
+define('BD_PORTA', getenv('BD_PORTA') ?: '3306');
+define('BD_BASEDADOS', getenv('BD_BASEDADOS'));
+define('BD_USUARIO', getenv('BD_USUARIO'));
+define('BD_SENHA', getenv('BD_SENHA'));
 
 define('APP_NOME', getenv('APP_NAME'));
 define('APP_AMBIENTE', getenv('APP_ENV'));
@@ -19,4 +20,3 @@ define('EMAIL_SENHA', getenv('MAIL_PASSWORD'));
 define('EMAIL_CRIPTOGRAFIA', getenv('MAIL_ENCRYPTION'));
 
 define('DURACAO_SESSAO', getenv('SESSION_LIFETIME') ?: 120);
-

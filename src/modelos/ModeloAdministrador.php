@@ -16,11 +16,15 @@ class ModeloAdministrador
     private static function inicializarConexao(): void
     {
         if (self::$pdo === null) {
-            require_once __DIR__ . '/../config/conexao_basedados.php';
-            if (!isset($conexao)) {
-                throw new PDOException("A variável \$conexao não foi definida em conexao_basedados.php.");
+            $caminho = __DIR__ . '/../config/conexao_basedados.php';
+            if (!file_exists($caminho)) {
+                throw new \RuntimeException('Arquivo de conexão não encontrado.');
             }
-            self::$pdo = $conexao;
+            require_once $caminho;
+            self::$pdo = obterConexao();
+            if (!(self::$pdo instanceof \PDO)) {
+                throw new \RuntimeException('Falha ao obter conexão PDO.');
+            }
         }
     }
 

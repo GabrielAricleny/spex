@@ -8,6 +8,11 @@ session_start();
 
 $erroLogin = $_SESSION['erro_login'] ?? '';
 unset($_SESSION['erro_login']);
+
+$_SESSION['utilizador'] = [
+    'nome' => $dadosAdmin['nome'], // ou o campo correto
+    'nivel_acesso' => 'admin'
+];
 ?>
 
 <section class="section is-fullheight-with-navbar has-background-dark">
