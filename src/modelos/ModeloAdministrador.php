@@ -22,7 +22,7 @@ class ModeloAdministrador
             }
             require_once $caminho;
             self::$pdo = obterConexao();
-            if (!(self::$pdo instanceof \PDO)) {
+            if (!(self::$pdo instanceof PDO)) {
                 throw new \RuntimeException('Falha ao obter conexão PDO.');
             }
         }
