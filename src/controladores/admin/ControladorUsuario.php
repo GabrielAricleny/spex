@@ -2,7 +2,7 @@
 
 namespace App\controladores\admin;
 
-use App\servicos\UsuarioServico;
+use App\Servicos\UsuarioServico;
 
 class ControladorUsuario
 {
@@ -22,9 +22,11 @@ class ControladorUsuario
             case 'criar':
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                        'email' => $_POST['email'] ?? '',
-                        'senha' => $_POST['senha'] ?? ''
+                        'nome_usuario'    => $_POST['nome_usuario'] ?? '',
+                        'nome_completo'   => $_POST['nome_completo'] ?? '',
+                        'email'           => $_POST['email'] ?? '',
+                        'senha'           => $_POST['senha'] ?? '',
+                        'id_nivel_acesso' => $_POST['id_nivel_acesso'] ?? ''
                     ];
                     $this->servico->criar($dados);
                     header('Location: ?rota=crud_usuario');
@@ -41,9 +43,11 @@ class ControladorUsuario
                 $usuario = $this->servico->buscarPorId($id);
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                        'email' => $_POST['email'] ?? '',
-                        'senha' => $_POST['senha'] ?? ''
+                        'nome_usuario'    => $_POST['nome_usuario'] ?? $usuario->nome_usuario,
+                        'nome_completo'   => $_POST['nome_completo'] ?? $usuario->nome_completo,
+                        'email'           => $_POST['email'] ?? $usuario->email,
+                        'senha'           => $_POST['senha'] ?? '', // só atualiza se não estiver vazio
+                        'id_nivel_acesso' => $_POST['id_nivel_acesso'] ?? $usuario->id_nivel_acesso
                     ];
                     $this->servico->atualizar($id, $dados);
                     header('Location: ?rota=crud_usuario');
@@ -59,6 +63,7 @@ class ControladorUsuario
                 header('Location: ?rota=crud_usuario');
                 exit;
 
+            case 'listar':
             default:
                 $usuarios = $this->servico->listarTodos();
                 include __DIR__ . '/../../visoes/admin/usuarios/listar.php';

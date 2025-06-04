@@ -21,7 +21,7 @@ class Verificacoes
             ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== $nivel
         ) {
             http_response_code(403);
-            require __DIR__ . '/../visoes/templates/erro_403.php';
+            require __DIR__ . '/../visoes/templates/erro403.php';
             exit;
         }
     }

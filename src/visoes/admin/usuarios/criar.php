@@ -28,27 +28,25 @@
 </style>
 
 <div class="painel-centralizado">
-    <h2>Editar Usuário</h2>
+    <h2>Novo Usuário</h2>
     <form method="post">
-        <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuario->id_usuario) ?>">
-
         <label class="form-label">Nome de Usuário</label>
-        <input type="text" name="nome_usuario" class="form-control" value="<?= htmlspecialchars($usuario->nome_usuario ?? '') ?>" required>
+        <input type="text" name="nome_usuario" class="form-control" required>
 
         <label class="form-label">Nome Completo</label>
-        <input type="text" name="nome_completo" class="form-control" value="<?= htmlspecialchars($usuario->nome_completo ?? '') ?>" required>
+        <input type="text" name="nome_completo" class="form-control" required>
 
         <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($usuario->email ?? '') ?>" required>
+        <input type="email" name="email" class="form-control" required>
 
-        <label class="form-label">Senha (deixe em branco para não alterar)</label>
-        <input type="password" name="senha" class="form-control">
+        <label class="form-label">Senha</label>
+        <input type="password" name="senha" class="form-control" required>
 
         <label class="form-label">Nível de Acesso</label>
         <select name="id_nivel_acesso" class="form-control" required>
             <option value="">Selecione...</option>
-            <option value="1" <?= ($usuario->id_nivel_acesso == 1) ? 'selected' : '' ?>>Administrador</option>
-            <option value="2" <?= ($usuario->id_nivel_acesso == 2) ? 'selected' : '' ?>>Usuário</option>
+            <option value="1">Administrador</option>
+            <option value="2">Estudante</option>
             <!-- Adicione mais opções conforme necessário -->
         </select>
 

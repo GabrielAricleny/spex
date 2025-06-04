@@ -1,8 +1,6 @@
 <?php
 
-namespace App\servicos;
-
-require_once __DIR__ . '/../../modelos/Administrador.php';
+namespace App\Servicos;
 
 use App\Modelos\Administrador;
 
@@ -22,11 +20,10 @@ class AdministradorServico
 
     public function criar($dados)
     {
-        // Cria um novo administrador com os dados fornecidos
+        // Cria um novo administrador para um usuário existente
         $admin = new Administrador();
-        $admin->nome = $dados['nome'] ?? '';
-        $admin->email = $dados['email'] ?? '';
-        $admin->senha = password_hash($dados['senha'] ?? '', PASSWORD_DEFAULT);
+        $admin->id_usuario = $dados['id_usuario'];
+        $admin->telefone = $dados['telefone'] ?? null;
         return $admin->salvar();
     }
 
@@ -37,12 +34,10 @@ class AdministradorServico
         if (!$admin) {
             return false;
         }
-        $admin->nome = $dados['nome'] ?? $admin->nome;
-        $admin->email = $dados['email'] ?? $admin->email;
-        if (!empty($dados['senha'])) {
-            $admin->senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
-        }
-        return $admin->salvar();
+        $admin->telefone = $dados['telefone'] ?? $admin->telefone;
+        return $admin->atualizar([
+            'telefone' => $admin->telefone
+        ]);
     }
 
     public function deletar($id)

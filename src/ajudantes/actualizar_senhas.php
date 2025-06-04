@@ -8,28 +8,42 @@ require_once __DIR__ . '/../config/conexao_basedados.php';
 
 function encriptar_senhas() {
     try {
-        $pdo = new PDO("mysql:host=" . BD_SERVIDOR . ";dbname=" . BD_BASEDADOS, BD_USUARIO, BD_SENHA);
+        $pdo = obterConexao();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Buscar todas as senhas que ainda estão em texto puro
+        // Buscar todas as senhas da tabela usuario
         $stmt = $pdo->query("SELECT id_usuario, senha FROM usuario");
+
+        $total = 0;
+        $ja_encriptadas = 0;
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['id_usuario'];
             $senha_actual = $row['senha'];
 
-            // Evita re-hash se a senha já estiver encriptada (opcional)
+            // Pula se a senha já está encriptada (bcrypt)
             if (preg_match('/^\$2[aby]\$.{56}$/', $senha_actual)) {
-                continue; // já está encriptada
+                $ja_encriptadas++;
+                continue;
+            }
+
+            // Pula se a senha está vazia
+            if (empty($senha_actual)) {
+                echo "Usuário $id com senha vazia, pulando.<br>";
+                continue;
             }
 
             $senha_hash = password_hash($senha_actual, PASSWORD_BCRYPT);
 
             $update = $pdo->prepare("UPDATE usuario SET senha = ? WHERE id_usuario = ?");
             $update->execute([$senha_hash, $id]);
+            $total++;
+            echo "Usuário $id senha atualizada.<br>";
         }
 
-        echo "Senhas atualizadas com sucesso!";
+        echo "<br>Senhas atualizadas com sucesso!<br>";
+        echo "Total de senhas encriptadas: $total<br>";
+        echo "Senhas já encriptadas: $ja_encriptadas<br>";
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\controladores\admin;
 
-use App\modelos\ModeloAdministrador;
+use App\Modelos\ModeloAdministrador;
 
 class ControladorLoginAdmin
 {
@@ -26,21 +26,26 @@ class ControladorLoginAdmin
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
 
+        // Debug
+        echo "Email recebido: [$email]<br>";
+        echo "Senha recebida: [$senha]<br>";
+
         $admin = ModeloAdministrador::login($email, $senha);
 
         if ($admin) {
             $_SESSION['utilizador'] = [
-                'id'            => $admin['id_usuario'],
                 'nome'          => $admin['nome_completo'],
-                'email'          => $admin['email'],
+                'email'         => $admin['email'],
                 'nivel_acesso'  => 'admin',
             ];
             header('Location: ?rota=painel_admin');
             exit;
         }
 
+        // Debug
+        // echo "Login falhou<br>";
         $_SESSION['erro_login'] = 'Email ou senha inválidos.';
-        include __DIR__ . '/../../visoes/admin/login_admin.php';
+        header('Location: ?rota=login_admin');
         exit;
     }
 

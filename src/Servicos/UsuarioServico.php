@@ -7,19 +7,20 @@ class UsuarioServico
 {
     public function listarTodos()
     {
-        // Retorna todos os usuários do banco de dados
         return Usuario::todos();
     }
 
     public function criar($dados)
     {
-        // Cria um novo usuário com os dados fornecidos
+        if (empty($dados['id_nivel_acesso'])) {
+            throw new \Exception('O campo Nível de Acesso é obrigatório.');
+        }
         $usuario = new Usuario();
         $usuario->nome_usuario = $dados['nome_usuario'] ?? '';
+        $usuario->nome_completo = $dados['nome_completo'] ?? '';
         $usuario->email = $dados['email'] ?? '';
         $usuario->senha = password_hash($dados['senha'] ?? '', PASSWORD_DEFAULT);
-        $usuario->nome_completo = $dados['nome_completo'] ?? '';
-        $usuario->id_nivel_acesso = $dados['id_nivel_acesso'] ?? null;
+        $usuario->id_nivel_acesso = $dados['id_nivel_acesso'];
         return $usuario->salvar();
     }
 

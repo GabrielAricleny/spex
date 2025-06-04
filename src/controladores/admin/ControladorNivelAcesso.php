@@ -47,7 +47,7 @@ class ControladorNivelAcesso
                 $stmt->bindValue(':descricao', $descricao, PDO::PARAM_STR);
 
                 if ($stmt->execute()) {
-                    header('Location: ?rota=admin_nivel_acesso');
+                    header('Location: ?rota=crud_nivel_acesso');
                     exit;
                 }
             }
@@ -93,7 +93,7 @@ class ControladorNivelAcesso
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
-                    header('Location: ?rota=admin_nivel_acesso');
+                    header('Location: ?rota=crud_nivel_acesso');
                     exit;
                 }
             }
@@ -122,7 +122,7 @@ class ControladorNivelAcesso
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        header('Location: ?rota=admin_nivel_acesso');
+        header('Location: ?rota=crud_nivel_acesso');
         exit;
     }
 

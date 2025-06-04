@@ -1,1 +1,1 @@
-SELECT * FROM usuario;
+SELECT id_usuario, email, senha FROM usuario;

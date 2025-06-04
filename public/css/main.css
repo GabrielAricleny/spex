@@ -15,14 +15,23 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #009688, #4CAF50);
+    background: #181a1b; /* mesmo tom do menu/header */
     color: white;
     margin-top: 3.25rem; /* altura padrão da navbar Bulma quando fixada */
 }
 
 /* NAVBAR */
 .navbar.is-dark {
-    background-color: #000 !important;
+    background-color: #181a1b !important; /* igual ao body */
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar,
+header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    background: transparent !important;
 }
 
 .navbar-item {
@@ -114,5 +123,52 @@ body {
         transform: translateY(-100vh) rotate(720deg);
         opacity: 0;
     }
+}
+
+/* TABELAS */
+.table {
+    background: #23272b;
+    color: #f8f9fa;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+}
+
+.table th, .table td {
+    border: 2px solid #888 !important;
+    color: #fff !important;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: none !important;
+}
+
+/* PAINEL CENTRALIZADO */
+.painel-centralizado {
+    max-width: 900px;
+    margin: 80px auto 40px auto; /* Aumente o valor do margin-top para descer o painel */
+    background: #343a40;
+    padding: 40px 32px 32px 32px;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.painel-centralizado h2 {
+    text-align: center;
+    color: #f8f9fa;
+    margin-bottom: 24px;
+}
+.painel-centralizado .table,
+.painel-centralizado .table th,
+.painel-centralizado .table td {
+    color: #fff !important;
+}
+
+/* AÇÕES NA TABELA */
+.acoes-tabela {
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* Espaço entre os botões */
 }
 

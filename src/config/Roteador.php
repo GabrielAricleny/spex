@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\config;
 
-// session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 class Roteador
 {

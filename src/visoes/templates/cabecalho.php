@@ -32,6 +32,56 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
             <link rel="stylesheet" href="css/<?= htmlspecialchars($css) ?>.css" />
         <?php endforeach; ?>
     <?php endif; ?>
+
+    <style>
+    /* Remove qualquer espaço extra do menu */
+    .navbar,
+    .navbar.is-dark,
+    .navbar.is-fixed-top,
+    header {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        background: #23272b !important;
+    }
+
+    .navbar {
+        border-radius: 0 !important;
+        min-height: 56px;
+    }
+
+    .navbar .navbar-item,
+    .navbar .navbar-brand {
+        color: #fff !important;
+    }
+
+    .navbar .navbar-item:hover,
+    .navbar .navbar-item:focus {
+        background: #343a40 !important;
+        color: #ffb84d !important;
+    }
+
+    .navbar .navbar-end .buttons .navbar-item {
+        margin-left: 8px;
+        margin-right: 0;
+        padding-bottom: 0 !important;
+    }
+
+    .navbar .navbar-end .buttons {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    header {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    body {
+        background: #181a1b;
+        /* ... */
+    }
+    </style>
 </head>
 <body>
 

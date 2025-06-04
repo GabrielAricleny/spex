@@ -2,7 +2,8 @@
 
 namespace App\controladores\admin;
 
-use App\servicos\AdministradorServico;
+use App\Servicos\AdministradorServico;
+use App\Modelos\Usuario;
 
 class ControladorAdministrador
 {
@@ -20,11 +21,11 @@ class ControladorAdministrador
 
         switch ($acao) {
             case 'criar':
+                $usuarios = Usuario::todos();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                        'email' => $_POST['email'] ?? '',
-                        'senha' => $_POST['senha'] ?? ''
+                        'id_usuario' => $_POST['id_usuario'] ?? '',
+                        'telefone'   => $_POST['telefone'] ?? ''
                     ];
                     $this->servico->criar($dados);
                     header('Location: ?rota=crud_administrador');
@@ -38,12 +39,15 @@ class ControladorAdministrador
                     header('Location: ?rota=crud_administrador');
                     exit;
                 }
-                $administrador = $this->servico->buscarPorId($id);
+                $admin = $this->servico->buscarPorId($id);
+                if (!$admin) {
+                    header('Location: ?rota=crud_administrador');
+                    exit;
+                }
+                // Não permita trocar o usuário do administrador já existente
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                        'email' => $_POST['email'] ?? '',
-                        'senha' => $_POST['senha'] ?? ''
+                        'telefone' => $_POST['telefone'] ?? $admin->telefone
                     ];
                     $this->servico->atualizar($id, $dados);
                     header('Location: ?rota=crud_administrador');
@@ -60,7 +64,7 @@ class ControladorAdministrador
                 exit;
 
             default:
-                $administradores = $this->servico->listarTodos();
+                $admins = $this->servico->listarTodos();
                 include __DIR__ . '/../../visoes/admin/administradores/listar.php';
                 break;
         }
