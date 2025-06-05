@@ -1,7 +1,7 @@
 <?php include __DIR__ . '/../_includes/header.php'; ?>
 
 <h2>Eliminar Nível de Acesso</h2>
-<p>Tem certeza que deseja eliminar o nível <strong><?= htmlspecialchars($nivel['nome_nivel']) ?></strong>?</p>
+<p>Tem certeza que deseja eliminar o nível <strong><?= htmlspecialchars($nivel['descricao']) ?></strong>?</p>
 
 <form method="post">
     <button type="submit" class="btn btn-danger">Sim, eliminar</button>

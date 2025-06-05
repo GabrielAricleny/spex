@@ -117,13 +117,19 @@ class ControladorNivelAcesso
             exit;
         }
 
-        $sql = 'DELETE FROM nivel_acesso WHERE id_nivel = :id';
-        $stmt = self::$pdo->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        try {
+            $sql = 'DELETE FROM nivel_acesso WHERE id_nivel = :id';
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
 
-        header('Location: ?rota=crud_nivel_acesso');
-        exit;
+            header('Location: ?rota=crud_nivel_acesso');
+            exit;
+        } catch (\PDOException $e) {
+            echo "<div style='color:red; font-weight:bold;'>Erro ao eliminar: " . htmlspecialchars($e->getMessage()) . "</div>";
+            echo "<a href='?rota=crud_nivel_acesso'>Voltar</a>";
+            exit;
+        }
     }
 
     // Roteia as ações CRUD

@@ -63,20 +63,24 @@
                         </div>
                     <?php endif; ?>
                 <?php else: ?>
-                     <div class="buttons is-centered mt-5">
-                          <a href="/exames-demo" class="button is-medium cta-button">
-                                <span class="icon"><i class="fas fa-edit"></i></span>
-                                <span>Experimentar Exame</span>
-                          </a>
-                          <a href="/como-funciona" class="button is-medium cta-button">
-                                <span class="icon"><i class="fas fa-info-circle"></i></span>
-                                <span>Como Funciona</span>
-                          </a>
-                          <a href="?rota=cadastro_estudante" class="button is-medium cta-button">
-                                <span class="icon"><i class="fas fa-user-plus"></i></span>
-                                <span>Criar Conta</span>
-                          </a>
-                     </div>
+     <div class="buttons is-centered mt-5">
+          <a href="/exames-demo" class="button is-medium cta-button">
+                <span class="icon"><i class="fas fa-edit"></i></span>
+                <span>Experimentar Exame</span>
+          </a>
+          <a href="/como-funciona" class="button is-medium cta-button">
+                <span class="icon"><i class="fas fa-info-circle"></i></span>
+                <span>Como Funciona</span>
+          </a>
+          <a href="?rota=cadastro_estudante" class="button is-medium cta-button">
+                <span class="icon"><i class="fas fa-user-plus"></i></span>
+                <span>Criar Conta</span>
+          </a>
+          <a href="?rota=login_estudante" class="button is-medium cta-button">
+                <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                <span>Entrar</span>
+          </a>
+     </div>
                 <?php endif; ?>
           </div>
      </div>

@@ -25,7 +25,7 @@ class ControladorAdministrador
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
                         'id_usuario' => $_POST['id_usuario'] ?? '',
-                        'telefone'   => $_POST['telefone'] ?? ''
+                        'telefone'   => $_POST['telefone' ] ?? ''
                     ];
                     $this->servico->criar($dados);
                     header('Location: ?rota=crud_administrador');
@@ -47,7 +47,8 @@ class ControladorAdministrador
                 // Não permita trocar o usuário do administrador já existente
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'telefone' => $_POST['telefone'] ?? $admin->telefone
+                        'telefone'      => $_POST['telefone'] ?? $admin->telefone,
+                        'nome_completo' => $_POST['nome_completo'] ?? $admin->nome_completo
                     ];
                     $this->servico->atualizar($id, $dados);
                     header('Location: ?rota=crud_administrador');
@@ -64,7 +65,7 @@ class ControladorAdministrador
                 exit;
 
             default:
-                $admins = $this->servico->listarTodos();
+                $administradores = $this->servico->listarTodos();
                 include __DIR__ . '/../../visoes/admin/administradores/listar.php';
                 break;
         }

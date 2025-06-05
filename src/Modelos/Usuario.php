@@ -10,6 +10,8 @@ class Usuario
     public $senha;
     public $nome_completo;
     public $id_nivel_acesso;
+    public $criado_em;
+    public $actualizado_em;
 
     // Busca um usuário pelo ID
     public static function buscarPorId($id)
@@ -73,6 +75,25 @@ class Usuario
         $pdo = self::getConexao();
         $stmt = $pdo->query("SELECT * FROM usuario");
         return $stmt->fetchAll(\PDO::FETCH_CLASS, self::class);
+    }
+
+    // Deleta um usuário pelo ID
+    public static function deletar($id_usuario)
+    {
+        $pdo = self::getConexao();
+        $stmt = $pdo->prepare("DELETE FROM usuario WHERE id_usuario = :id_usuario");
+        return $stmt->execute(['id_usuario' => $id_usuario]);
+    }
+
+    // Atualiza apenas o nome completo do usuário
+    public static function atualizarNomeCompleto($id_usuario, $nome_completo)
+    {
+        $pdo = self::getConexao();
+        $stmt = $pdo->prepare("UPDATE usuario SET nome_completo = :nome_completo WHERE id_usuario = :id_usuario");
+        return $stmt->execute([
+            'nome_completo' => $nome_completo,
+            'id_usuario' => $id_usuario
+        ]);
     }
 
     // Conexão com o banco de dados usando o arquivo centralizado

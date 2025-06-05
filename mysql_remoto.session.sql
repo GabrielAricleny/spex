@@ -1,1 +1,1 @@
-SELECT id_usuario, email, senha FROM usuario;
+SELECT id_curso, nome_curso, nivel_curso FROM curso;

@@ -27,7 +27,9 @@ if (!$estudante) {
 
             <!-- Conteúdo Principal -->
             <div class="column">
-                <h1 class="title">Bem-vindo, <?= htmlspecialchars($estudante['nome_estudante']) ?>!</h1>
+                <h1 class="title">
+                    Bem-vindo, <?= htmlspecialchars($estudante['nome_completo'] ?? $estudante['nome_usuario'] ?? 'Estudante') ?>!
+                </h1>
                 
                 <div class="tile is-ancestor mt-5">
                     <div class="tile is-parent">

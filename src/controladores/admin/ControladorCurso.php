@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\controladores\admin;
 
-use App\servicos\CursoServico;
+use App\Servicos\CursoServico;
 
 class ControladorCurso
 {
@@ -23,26 +23,28 @@ class ControladorCurso
             case 'criar':
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
+                        'nome_curso' => $_POST['nome_curso'] ?? '',
+                        'nivel'      => $_POST['nivel'] ?? ''
                     ];
                     $this->servico->criar($dados);
                     header('Location: ?rota=crud_curso');
                     exit;
                 }
-                include __DIR__ . '/../../visoes/admin/curso/criar.php';
+                include __DIR__ . '/../../visoes/admin/cursos/criar.php';
                 break;
 
             case 'editar':
                 $curso = $this->servico->buscarPorId($id);
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
-                        'nome' => $_POST['nome'] ?? '',
+                        'nome_curso' => $_POST['nome_curso'] ?? '',
+                        'nivel'      => $_POST['nivel'] ?? ''
                     ];
                     $this->servico->atualizar($id, $dados);
                     header('Location: ?rota=crud_curso');
                     exit;
                 }
-                include __DIR__ . '/../../visoes/admin/curso/editar.php';
+                include __DIR__ . '/../../visoes/admin/cursos/editar.php';
                 break;
 
             case 'deletar':
@@ -52,7 +54,7 @@ class ControladorCurso
 
             default:
                 $cursos = $this->servico->listarTodos();
-                include __DIR__ . '/../../visoes/admin/curso/listar.php';
+                include __DIR__ . '/../../visoes/admin/cursos/listar.php';
                 break;
         }
     }

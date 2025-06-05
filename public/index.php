@@ -6,6 +6,9 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+ini_set('log_errors', 1);
+ini_set('error_log', '/tmp/php_errors.log');
+
 // Inicia sessão se ainda não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -79,9 +82,9 @@ $roteador->adicionar(['POST'], 'autenticar_estudante', fn() => (new ControladorL
 $roteador->adicionar(['GET'], 'sair_estudante', fn() => (new ControladorLoginEstudante())->terminarSessao(), ['autenticadoEstudante']);
 
 // Funcionalidades do estudante
-//$roteador->adicionar(['GET'], 'dashboard_estudante', fn() => (new ControladorEstudanteUser())->dashboard(), ['autenticadoEstudante']);
-$roteador->adicionar(['GET'], 'arena_exames', fn() => (new ControladorExames())->listarExames(), ['autenticadoEstudante']);
+$roteador->adicionar(['GET'], 'dashboard_estudante', fn() => (new ControladorEstudanteUser())->dashboard(), ['autenticadoEstudante']);
 $roteador->adicionar(['GET', 'POST'], 'cadastro_estudante', fn() => (new ControladorEstudanteUser())->cadastro());
+$roteador->adicionar(['GET', 'POST'], 'registro', fn() => (new ControladorEstudanteUser())->cadastro());
 
 // Rota a partir da query string, por padrão 'inicio'
 $rota = $_GET['rota'] ?? 'inicio';

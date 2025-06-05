@@ -33,6 +33,9 @@
         <label class="form-label">Usuário</label>
         <input type="text" class="form-control" value="<?= htmlspecialchars($admin->nome_usuario ?? '') ?>" readonly>
 
+        <label class="form-label">Nome Completo</label>
+        <input type="text" name="nome_completo" class="form-control" value="<?= htmlspecialchars($admin->nome_completo ?? '') ?>">
+
         <label class="form-label">Telefone</label>
         <input type="text" name="telefone" class="form-control" value="<?= htmlspecialchars($admin->telefone ?? '') ?>">
 

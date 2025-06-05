@@ -1,7 +1,7 @@
 USE db_spex;
 
 INSERT INTO usuario (nome_usuario, senha, email, nome_completo, id_nivel_acesso) VALUES
-('mr_somebody', 'admin', 'mr.somebody@example.com', 'Mr. Somebody Administrator', 1);
+('MrSomebody', 'admin', 'mr.somebody@espex.edu.ao', 'Mr. Somebody Admin', 1);
 
 INSERT INTO administrador (id_usuario, telefone) VALUES
 (1, '000-000-000');

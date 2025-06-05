@@ -52,7 +52,7 @@ class UsuarioServico
         // Deleta o usuário pelo ID
         $usuario = Usuario::buscarPorId($id);
         if ($usuario) {
-            return $usuario->deletar();
+            return Usuario::deletar($id);
         }
         return false;
     }

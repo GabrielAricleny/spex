@@ -50,15 +50,18 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
         min-height: 56px;
     }
 
+    /* Cor padrão: branco, hover: violeta */
     .navbar .navbar-item,
     .navbar .navbar-brand {
         color: #fff !important;
     }
 
     .navbar .navbar-item:hover,
-    .navbar .navbar-item:focus {
-        background: #343a40 !important;
-        color: #ffb84d !important;
+    .navbar .navbar-item:focus,
+    .navbar .navbar-end .buttons .navbar-item:hover,
+    .navbar .navbar-end .buttons .navbar-item:focus {
+        background: transparent !important;
+        color: #8f5fff !important;
     }
 
     .navbar .navbar-end .buttons .navbar-item {
@@ -70,6 +73,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
     .navbar .navbar-end .buttons {
         margin-bottom: 0 !important;
         padding-bottom: 0 !important;
+        margin-right: 15px !important; /* aumenta o afastamento do grupo de botões da margem direita */
     }
 
     header {
@@ -80,6 +84,60 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
     body {
         background: #181a1b;
         /* ... */
+    }
+
+    .navbar-item .link-admin {
+        color: #8f5fff !important; /* mantém o violeta durante o hover */
+    }
+    
+    .navbar-item .link-admin:hover a {
+        color: #fff;
+    }
+
+    /* Ajuste para todos os ícones dos botões do menu ficarem próximos ao texto */
+    .navbar-item .icon {
+        margin-right: -0.5rem;
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+        font-size: 1em;
+        height: 1em;
+    }
+
+    .navbar-item .icon i {
+        position: relative;
+        top: 1px; /* ajuste fino, pode ser 0, 1px ou 2px conforme o resultado visual */
+    }
+
+    /* Área Administrativa: cor padrão laranja, hover violeta */
+    .navbar .navbar-end .buttons .navbar-item.link-admin,
+    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"] {
+        color: #ffb84d !important;
+    }
+    .navbar .navbar-end .buttons .navbar-item.link-admin:hover,
+    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:hover {
+        color: #8f5fff !important;
+        background: transparent !important;
+    }
+
+    /* Área Administrativa: cor padrão igual aos outros links quando não logado */
+    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin) {
+        color: #fff !important;
+    }
+    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin):hover,
+    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin):focus {
+        color: #8f5fff !important;
+        background: transparent !important;
+    }
+
+    /* Quando logado como admin, mantém o destaque laranja */
+    .navbar .navbar-end .buttons .navbar-item.link-admin {
+        color: #ffb84d !important;
+    }
+    .navbar .navbar-end .buttons .navbar-item.link-admin:hover,
+    .navbar .navbar-end .buttons .navbar-item.link-admin:focus {
+        color: #8f5fff !important;
+        background: transparent !important;
     }
     </style>
 </head>
@@ -108,9 +166,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
                 <a href="?rota=faq" class="navbar-item">Perguntas Frequentes</a>
 
                 <?php if ($utilizadorLogado): ?>
-                    <?php if ($nivelAcesso === 'admin'): ?>
-                        <a href="?rota=painel_admin" class="navbar-item">Painel Admin</a>
-                    <?php else: ?>
+                    <?php if ($nivelAcesso !== 'admin'): ?>
                         <a href="?rota=dashboard_utilizador" class="navbar-item">Dashboard</a>
                         <a href="?rota=perfil_utilizador" class="navbar-item">Meu Perfil</a>
                     <?php endif; ?>
@@ -120,14 +176,17 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
             <div class="navbar-end">
                 <?php if ($utilizadorLogado): ?>
                     <div class="navbar-item">
-                        <span>Olá, <strong class="nome-utilizador" style="color: orange;"><?= htmlspecialchars($nomeUtilizador) ?></strong></span>
-                    </div>
-                    <div class="navbar-item">
                         <?php if ($nivelAcesso === 'admin'): ?>
-                            <a href="?rota=sair_admin" class="botao-sair-admin">
-                                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                                <span>Sair</span>
-                            </a>
+                            <div class="buttons">
+                                <a href="?rota=painel_admin" class="navbar-item link-admin" style="color:#ffb84d;">
+                                    <span class="icon"><i class="fas fa-user-shield"></i></span>
+                                    <span>Área Administrativa</span>
+                                </a>
+                                <a href="?rota=sair_admin" class="navbar-item">
+                                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                                    <span>Sair</span>
+                                </a>
+                            </div>
                         <?php else: ?>
                             <a href="?rota=sair_estudante" class="botao-sair-estudante">
                                 <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
@@ -137,14 +196,17 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
                     </div>
                 <?php else: ?>
                     <div class="buttons">
-                        <a href="?rota=registro" class="navbar-item" style="color:#fff;">
+                        <a href="?rota=cadastro_estudante" class="navbar-item">
                             <span class="icon"><i class="fas fa-user-plus"></i></span>
                             <span>Criar Conta</span>
                         </a>
-
-                        <a href="?rota=login_admin" class="navbar-item" style="color:#fff;">
+                        <a href="?rota=login_estudante" class="navbar-item navbar-item-entrar">
                             <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
                             <span>Entrar</span>
+                        </a>
+                        <a href="?rota=login_admin" class="navbar-item" style="color:#ffb84d;">
+                            <span class="icon"><i class="fas fa-user-shield"></i></span>
+                            <span>Área Administrativa</span>
                         </a>
                     </div>
                 <?php endif; ?>

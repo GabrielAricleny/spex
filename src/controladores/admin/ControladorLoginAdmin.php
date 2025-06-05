@@ -63,7 +63,7 @@ class ControladorLoginAdmin
     public function terminarSessao(): void
     {
         session_destroy();
-        header('Location: ?rota=login_admin');
+        header('Location: ?rota=inicio');
         exit;
     }
 }

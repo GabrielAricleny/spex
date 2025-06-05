@@ -31,10 +31,20 @@ class AdministradorServico
         if (!$admin) {
             return false;
         }
+
+        // Atualiza telefone na tabela administrador
         $admin->telefone = $dados['telefone'] ?? $admin->telefone;
-        return $admin->atualizar([
+        $resultadoAdmin = $admin->atualizar([
             'telefone' => $admin->telefone
         ]);
+
+        // Atualiza nome_completo na tabela usuario, se enviado
+        if (isset($dados['nome_completo'])) {
+            // Supondo que existe um método para atualizar o usuário pelo id_usuario
+            \App\Modelos\Usuario::atualizarNomeCompleto($admin->id_usuario, $dados['nome_completo']);
+        }
+
+        return $resultadoAdmin;
     }
 
     public function deletar($id)

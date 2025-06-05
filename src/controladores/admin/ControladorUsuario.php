@@ -46,7 +46,7 @@ class ControladorUsuario
                         'nome_usuario'    => $_POST['nome_usuario'] ?? $usuario->nome_usuario,
                         'nome_completo'   => $_POST['nome_completo'] ?? $usuario->nome_completo,
                         'email'           => $_POST['email'] ?? $usuario->email,
-                        'senha'           => $_POST['senha'] ?? '', // só atualiza se não estiver vazio
+                        'senha'           => $_POST['senha'] ?? '', // só actualiza se não estiver vazio
                         'id_nivel_acesso' => $_POST['id_nivel_acesso'] ?? $usuario->id_nivel_acesso
                     ];
                     $this->servico->atualizar($id, $dados);
@@ -56,7 +56,7 @@ class ControladorUsuario
                 include __DIR__ . '/../../visoes/admin/usuarios/editar.php';
                 break;
 
-            case 'deletar':
+            case 'eliminar':
                 if ($id) {
                     $this->servico->deletar($id);
                 }

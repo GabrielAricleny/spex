@@ -2,54 +2,54 @@
 
 <main>
     <div class="painel-centralizado">
-        <h2 class="title has-text-centered">Editar Estudante</h2>
+        <h2 class="title has-text-centered">Novo Estudante</h2>
         <form method="post">
             <div class="field">
                 <label class="label">Nome</label>
                 <div class="control">
-                    <input class="input" type="text" name="nome_estudante" required value="<?= htmlspecialchars($estudante->nome_estudante ?? '') ?>">
+                    <input class="input" type="text" name="nome_estudante" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Data de Nascimento</label>
                 <div class="control">
-                    <input class="input" type="date" name="data_nasc" required value="<?= htmlspecialchars($estudante->data_nasc ?? '') ?>">
+                    <input class="input" type="date" name="data_nasc" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Telefone</label>
                 <div class="control">
-                    <input class="input" type="text" name="telefone" required value="<?= htmlspecialchars($estudante->telefone ?? '') ?>">
+                    <input class="input" type="text" name="telefone" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control">
-                    <input class="input" type="email" name="email" required value="<?= htmlspecialchars($estudante->email ?? '') ?>">
+                    <input class="input" type="email" name="email" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Área de Formação</label>
                 <div class="control">
-                    <input class="input" type="text" name="area_formacao" required value="<?= htmlspecialchars($estudante->area_formacao ?? '') ?>">
+                    <input class="input" type="text" name="area_formacao" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Curso Pretendido</label>
                 <div class="control">
-                    <input class="input" type="text" name="curso_pretendido" required value="<?= htmlspecialchars($estudante->curso_pretendido ?? '') ?>">
+                    <input class="input" type="text" name="curso_pretendido" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Nome de Usuário</label>
                 <div class="control">
-                    <input class="input" type="text" name="nome_usuario" required value="<?= htmlspecialchars($estudante->nome_usuario ?? '') ?>">
+                    <input class="input" type="text" name="nome_usuario" required>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Senha (preencha para alterar)</label>
+                <label class="label">Senha</label>
                 <div class="control">
-                    <input class="input" type="password" name="senha_estudante">
+                    <input class="input" type="password" name="senha_estudante" required>
                 </div>
             </div>
             <div class="field">
