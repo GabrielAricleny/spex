@@ -3,9 +3,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$utilizadorLogado = $_SESSION['utilizador'] ?? null;
-$nomeUtilizador   = $utilizadorLogado['nome'] ?? null;
-$nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
+$utilizadorLogado = $_SESSION['utilizador'] ?? $_SESSION['estudante'] ?? null;
+$nomeUtilizador   = $utilizadorLogado['nome'] ?? $utilizadorLogado['nome_completo'] ?? null;
+$nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
 ?>
 <!DOCTYPE html>
 <html lang="pt-AO">
@@ -13,7 +13,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SPEX | Início</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
@@ -32,114 +32,6 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
             <link rel="stylesheet" href="css/<?= htmlspecialchars($css) ?>.css" />
         <?php endforeach; ?>
     <?php endif; ?>
-
-    <style>
-    /* Remove qualquer espaço extra do menu */
-    .navbar,
-    .navbar.is-dark,
-    .navbar.is-fixed-top,
-    header {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        background: #23272b !important;
-    }
-
-    .navbar {
-        border-radius: 0 !important;
-        min-height: 56px;
-    }
-
-    /* Cor padrão: branco, hover: violeta */
-    .navbar .navbar-item,
-    .navbar .navbar-brand {
-        color: #fff !important;
-    }
-
-    .navbar .navbar-item:hover,
-    .navbar .navbar-item:focus,
-    .navbar .navbar-end .buttons .navbar-item:hover,
-    .navbar .navbar-end .buttons .navbar-item:focus {
-        background: transparent !important;
-        color: #8f5fff !important;
-    }
-
-    .navbar .navbar-end .buttons .navbar-item {
-        margin-left: 8px;
-        margin-right: 0;
-        padding-bottom: 0 !important;
-    }
-
-    .navbar .navbar-end .buttons {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-        margin-right: 15px !important; /* aumenta o afastamento do grupo de botões da margem direita */
-    }
-
-    header {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
-
-    body {
-        background: #181a1b;
-        /* ... */
-    }
-
-    .navbar-item .link-admin {
-        color: #8f5fff !important; /* mantém o violeta durante o hover */
-    }
-    
-    .navbar-item .link-admin:hover a {
-        color: #fff;
-    }
-
-    /* Ajuste para todos os ícones dos botões do menu ficarem próximos ao texto */
-    .navbar-item .icon {
-        margin-right: -0.5rem;
-        display: inline-flex;
-        align-items: center;
-        vertical-align: middle;
-        font-size: 1em;
-        height: 1em;
-    }
-
-    .navbar-item .icon i {
-        position: relative;
-        top: 1px; /* ajuste fino, pode ser 0, 1px ou 2px conforme o resultado visual */
-    }
-
-    /* Área Administrativa: cor padrão laranja, hover violeta */
-    .navbar .navbar-end .buttons .navbar-item.link-admin,
-    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"] {
-        color: #ffb84d !important;
-    }
-    .navbar .navbar-end .buttons .navbar-item.link-admin:hover,
-    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:hover {
-        color: #8f5fff !important;
-        background: transparent !important;
-    }
-
-    /* Área Administrativa: cor padrão igual aos outros links quando não logado */
-    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin) {
-        color: #fff !important;
-    }
-    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin):hover,
-    .navbar .navbar-end .buttons .navbar-item[style*="color:#ffb84d"]:not(.link-admin):focus {
-        color: #8f5fff !important;
-        background: transparent !important;
-    }
-
-    /* Quando logado como admin, mantém o destaque laranja */
-    .navbar .navbar-end .buttons .navbar-item.link-admin {
-        color: #ffb84d !important;
-    }
-    .navbar .navbar-end .buttons .navbar-item.link-admin:hover,
-    .navbar .navbar-end .buttons .navbar-item.link-admin:focus {
-        color: #8f5fff !important;
-        background: transparent !important;
-    }
-    </style>
 </head>
 <body>
 
@@ -165,19 +57,17 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
                 <a href="?rota=universidades" class="navbar-item">Universidades</a>
                 <a href="?rota=faq" class="navbar-item">Perguntas Frequentes</a>
 
-                <?php if ($utilizadorLogado): ?>
-                    <?php if ($nivelAcesso !== 'admin'): ?>
-                        <a href="?rota=dashboard_utilizador" class="navbar-item">Dashboard</a>
-                        <a href="?rota=perfil_utilizador" class="navbar-item">Meu Perfil</a>
-                    <?php endif; ?>
+                <?php if ($utilizadorLogado && $nivelAcesso !== 'admin'): ?>
+                    <a href="?rota=dashboard_estudante" class="navbar-item">Dashboard</a>
+                    <a href="?rota=perfil_estudante" class="navbar-item">Meu Perfil</a>
                 <?php endif; ?>
             </div>
 
             <div class="navbar-end">
                 <?php if ($utilizadorLogado): ?>
                     <div class="navbar-item">
-                        <?php if ($nivelAcesso === 'admin'): ?>
-                            <div class="buttons">
+                        <div class="buttons">
+                            <?php if ($nivelAcesso === 'admin'): ?>
                                 <a href="?rota=painel_admin" class="navbar-item link-admin" style="color:#ffb84d;">
                                     <span class="icon"><i class="fas fa-user-shield"></i></span>
                                     <span>Área Administrativa</span>
@@ -186,13 +76,13 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
                                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                                     <span>Sair</span>
                                 </a>
-                            </div>
-                        <?php else: ?>
-                            <a href="?rota=sair_estudante" class="botao-sair-estudante">
-                                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                                <span>Sair</span>
-                            </a>
-                        <?php endif; ?>
+                            <?php else: ?>
+                                <a href="?rota=sair_estudante" class="navbar-item">
+                                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                                    <span>Sair</span>
+                                </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php else: ?>
                     <div class="buttons">

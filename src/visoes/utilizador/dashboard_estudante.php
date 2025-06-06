@@ -30,28 +30,30 @@ if (!$estudante) {
                 <h1 class="title">
                     Bem-vindo, <?= htmlspecialchars($estudante['nome_completo'] ?? $estudante['nome_usuario'] ?? 'Estudante') ?>!
                 </h1>
-                
+
+                <!-- Blocos de informação -->
                 <div class="tile is-ancestor mt-5">
                     <div class="tile is-parent">
-                        <article class="tile is-child box has-background-primary-light">
+                        <article class="tile is-child box bloco-exames">
                             <p class="title">Exames Disponíveis</p>
                             <p class="subtitle">5</p>
                         </article>
                     </div>
                     <div class="tile is-parent">
-                        <article class="tile is-child box has-background-info-light">
+                        <article class="tile is-child box bloco-nota">
                             <p class="title">Última Nota</p>
                             <p class="subtitle">16.5</p>
                         </article>
                     </div>
                     <div class="tile is-parent">
-                        <article class="tile is-child box has-background-success-light">
+                        <article class="tile is-child box bloco-progresso">
                             <p class="title">Progresso</p>
                             <p class="subtitle">75%</p>
                         </article>
                     </div>
                 </div>
 
+                <!-- Tabela de últimos exames -->
                 <div class="card mt-5">
                     <header class="card-header">
                         <p class="card-header-title">Últimos Exames Realizados</p>
@@ -79,6 +81,7 @@ if (!$estudante) {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

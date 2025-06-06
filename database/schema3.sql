@@ -258,6 +258,8 @@ CREATE TABLE IF NOT EXISTS `resultado_exame` (
   CONSTRAINT `fk_resposta_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE -- id_exame_realizado pode referenciar exame_sistema_realizado ou exame_universidade_realizado (ver nota abaixo)
 );
+
+
 -- -----------------------------------------------------
 -- Table pergunta_acertada_exame_sistema
 -- -----------------------------------------------------
@@ -270,6 +272,10 @@ CREATE TABLE IF NOT EXISTS `pergunta_acertada_exame_sistema` (
   CONSTRAINT `fk_acerto_exame_realizado` FOREIGN KEY (`id_exame_sistema_realizado`) REFERENCES `exame_sistema_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_acerto_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
+
+
+SOURCE database/triggers.sql;
+
 -- -----------------------------------------------------
 -- Restauração dos valores de sistema
 -- -----------------------------------------------------

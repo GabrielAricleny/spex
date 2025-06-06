@@ -1,0 +1,27 @@
+/* Estilos personalizados para a dashboard do estudante */
+
+.tile.is-parent {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bloco-exames {
+    background-color: #22313F; /* Variação mais escura de azul petróleo */
+    color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+}
+
+.bloco-nota {
+    background-color: #22313F; /* Variação mais escura de azul petróleo */
+    color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+}
+
+.bloco-progresso {
+    background-color: #22313F; /* Variação mais escura de azul petróleo */
+    color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+}

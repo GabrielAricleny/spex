@@ -6,6 +6,7 @@
      ├── 📄 CAMINHO_BACKUP # Caminho onde os backups são salvos
      ├── 📄 schema.sql # Script de criação da base de dados  
      ├── 📄 seeds.sql # Dados iniciais (usuários, cursos, etc)
+     ├── 📄 triggers.sql # Restrições ao Nível da Base de Dados
      └── 📄 consultar_estudantes.sql # Consulta para testes de login
 ├── 📁 docs
      ├── 📁 diagramas # 📊 Diagramas UML do sistema

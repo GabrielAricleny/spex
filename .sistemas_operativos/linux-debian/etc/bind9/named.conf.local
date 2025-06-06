@@ -1,0 +1,6 @@
+zone "spex.edu.ao" {
+    type master;
+    file "/etc/bind/zone/db.spex.edu.ao";
+    allow-update { none; };
+};
+

@@ -1,0 +1,18 @@
+$TTL 86400
+@   IN  SOA ns.spex.edu.ao. admin.spex.edu. (
+        2025052601 ; Serial YYYYMMDDnn
+        3600       ; Refresh
+        1800       ; Retry
+        604800     ; Expire
+        86400 )    ; Negative Cache TTL
+
+; Servidor de nomes
+    IN  NS  ns.spex.edu.ao.
+
+; IP do servidor DNS / web
+ns  IN  A   192.168.10.1
+@   IN  A   192.168.10.1
+
+; Subdomínios
+admin   IN  A   192.168.10.1
+www     IN  CNAME @

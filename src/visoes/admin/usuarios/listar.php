@@ -1,3 +1,5 @@
+[usuarios/listar.php]
+
 <?php $paginaAtual = 'usuario'; ?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 
