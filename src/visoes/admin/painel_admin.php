@@ -94,6 +94,50 @@ $resumos = [
 ?>
 
 <style>
+body, html {
+    background: #23272f !important;
+}
+.section {
+    background: transparent !important;
+}
+.box {
+    background: #2d323c !important;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: none;
+}
+.card {
+    background: #23272f !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    border: none;
+}
+.card-content {
+    color: #fff;
+}
+.title, .subtitle, .panel-heading, .panel-block {
+    color: #fff !important;
+}
+.panel {
+    background: #23272f !important;
+    border: none;
+}
+.panel-block {
+    border: none !important;
+}
+.panel-block:hover, .panel-block:focus {
+    background: #2d323c !important;
+}
+.card-footer, .card-footer-item {
+    background: #23272f !important;
+    color: #6cb2eb !important;
+}
+.card-footer-item:hover, .card-footer-item:focus {
+    background: #2d323c !important;
+    color: #fff !important;
+    text-decoration: underline;
+}
+
 /* Efeito hover igual ao rodapé para links do sidebar */
 .sidebar-link {
     transition: color 0.2s, background 0.2s;
@@ -117,42 +161,48 @@ $resumos = [
 }
 </style>
 
-<div class="columns is-gapless" style="min-height: 100vh; background-color: #181a1b;">
-    <!-- Menu lateral -->
-    <aside class="column is-3" style="background-color: #23272b; box-shadow: 2px 0 8px rgba(0,0,0,0.15);">
-        <div class="p-5">
-            <h2 class="title is-5 has-text-white mb-4">Tabelas da Base de Dados:</h2>
-            <ul>
-                <?php foreach ($resumos as $tabela => $dados): ?>
-                    <li class="mb-3">
-                        <a href="?rota=crud_<?= $tabela ?>" class="has-text-white is-size-6 sidebar-link">
-                            <i class="fas fa-angle-right"></i> <?= $dados['titulo'] ?>
+<section class="section" style="background: #f5f6fa; min-height: 100vh;">
+    <div class="container">
+        <div class="columns">
+            <!-- Sidebar -->
+            <aside class="column is-3">
+                <nav class="panel is-link">
+                    <p class="panel-heading">
+                        Tabelas do Sistema
+                    </p>
+                    <?php foreach ($resumos as $tabela => $dados): ?>
+                        <a href="?rota=crud_<?= $tabela ?>" class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-database"></i>
+                            </span>
+                            <?= $dados['titulo'] ?>
                         </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </aside>
-
-    <!-- Conteúdo principal -->
-    <main class="column p-6" style="background-color: #181a1b; padding-bottom: 3rem; border-bottom: none; box-shadow: none;">
-        <h1 class="title has-text-white mb-5 has-text-centered">Painel de Administração</h1>
-        <div class="columns is-multiline" style="margin-left: 0.5rem; margin-right: 0.5rem; padding-bottom: 2.5rem; border-bottom: none; box-shadow: none;">
-            <?php foreach ($resumos as $tabela => $dados): ?>
-                <div class="column is-one-quarter is-flex" style="padding-left: 0.75rem; padding-right: 0.75rem; display: flex;">
-                    <div class="card is-flex is-flex-direction-column" style="background-color: #23272b; color: #fff; width: 100%; min-height: 200px; flex: 1 1 auto; display: flex;">
-                        <div class="card-content has-text-centered" style="flex: 1 1 auto;">
-                            <p class="title is-4 has-text-white"><?= $dados['total'] ?></p>
-                            <p class="subtitle is-6 has-text-grey-light"><?= $dados['titulo'] ?></p>
-                        </div>
-                        <footer class="card-footer" style="margin-top: auto; background-color: #23272b;">
-                            <a href="?rota=crud_<?= $tabela ?>" class="card-footer-item gerir-link" style="color: #6cb2eb;">Gerir</a>
-                        </footer>
+                    <?php endforeach; ?>
+                </nav>
+            </aside>
+            <!-- Main Content -->
+            <div class="column is-9">
+                <div class="box" style="border-radius: 10px;">
+                    <h1 class="title is-3 has-text-link has-text-centered mb-5">Painel de Administração</h1>
+                    <div class="columns is-multiline">
+                        <?php foreach ($resumos as $tabela => $dados): ?>
+                            <div class="column is-one-third">
+                                <div class="card" style="border-radius: 8px;">
+                                    <div class="card-content has-text-centered">
+                                        <p class="title is-2 has-text-link"><?= $dados['total'] ?></p>
+                                        <p class="subtitle is-6"><?= $dados['titulo'] ?></p>
+                                    </div>
+                                    <footer class="card-footer">
+                                        <a href="?rota=crud_<?= $tabela ?>" class="card-footer-item has-text-link">Gerir</a>
+                                    </footer>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
         </div>
-    </main>
-</div>
+    </div>
+</section>
 
 <?php require_once __DIR__ . '/../templates/rodape.php'; ?>
