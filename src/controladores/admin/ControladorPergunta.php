@@ -2,63 +2,91 @@
 
 namespace App\controladores\admin;
 
-use App\servicos\PerguntaCadastradaServico;
+use App\Modelos\ModeloPergunta;
+use App\Modelos\Curso;
+use App\Modelos\ModeloDisciplina;
+use App\Modelos\ModeloTema;
+use App\Modelos\ModeloStatusPergunta;
 
-class ControladorPerguntaCadastrada
+class ControladorPergunta
 {
-    protected $servico;
+    private ModeloPergunta $modelo;
 
     public function __construct()
     {
-        $this->servico = new PerguntaCadastradaServico();
+        $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
+        $this->modelo = new ModeloPergunta($conexao);
     }
 
-    public function crud()
+    public function listar()
     {
-        $acao = $_GET['acao'] ?? 'listar';
-        $id = $_GET['id'] ?? null;
+        $perguntas = $this->modelo->listar();
+        require __DIR__ . '/../../visoes/admin/pergunta/listar.php';
+    }
 
-        switch ($acao) {
-            case 'criar':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->criar($dados);
-                    header('Location: ?rota=crud_pergunta_cadastrada');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/pergunta_cadastrada/criar.php';
-                break;
+    public function criar()
+    {
+        $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
+        $cursos = Curso::todos();
+        $disciplinas = (new ModeloDisciplina($conexao))->listar();
+        $temas = (new ModeloTema($conexao))->listar();
+        $status = (new ModeloStatusPergunta($conexao))->listar();
 
-            case 'editar':
-                if (!$id) {
-                    header('Location: ?rota=crud_pergunta_cadastrada');
-                    exit;
-                }
-                $perguntaCadastrada = $this->servico->buscarPorId($id);
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->atualizar($id, $dados);
-                    header('Location: ?rota=crud_pergunta_cadastrada');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/pergunta_cadastrada/editar.php';
-                break;
-
-            case 'deletar':
-                if ($id) {
-                    $this->servico->deletar($id);
-                }
-                header('Location: ?rota=crud_pergunta_cadastrada');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $dados = [
+                'enunciado' => trim($_POST['enunciado'] ?? ''),
+                'curso' => (int)($_POST['curso'] ?? 0),
+                'resposta' => trim($_POST['resposta'] ?? ''),
+                'disciplina' => (int)($_POST['disciplina'] ?? 0),
+                'tema' => (int)($_POST['tema'] ?? 0),
+                'status' => (int)($_POST['status'] ?? 0)
+            ];
+            if ($dados['enunciado'] && $dados['curso'] && $dados['resposta'] && $dados['disciplina'] && $dados['tema'] && $dados['status']) {
+                $this->modelo->criar($dados);
+                header('Location: ?rota=pergunta_listar');
                 exit;
-
-            default:
-                $perguntasCadastradas = $this->servico->listarTodos();
-                include __DIR__ . '/../../visoes/admin/pergunta_cadastrada/listar.php';
-                break;
+            }
         }
+        require __DIR__ . '/../../visoes/admin/pergunta/criar.php';
+    }
+
+    public function editar()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $pergunta = $this->modelo->buscarPorId($id);
+        $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
+        $cursos = Curso::todos();
+        $disciplinas = (new ModeloDisciplina($conexao))->listar();
+        $temas = (new ModeloTema($conexao))->listar();
+        $status = (new ModeloStatusPergunta($conexao))->listar();
+
+        if (!$pergunta) {
+            header('Location: ?rota=pergunta_listar');
+            exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $dados = [
+                'enunciado' => trim($_POST['enunciado'] ?? ''),
+                'curso' => (int)($_POST['curso'] ?? 0),
+                'resposta' => trim($_POST['resposta'] ?? ''),
+                'disciplina' => (int)($_POST['disciplina'] ?? 0),
+                'tema' => (int)($_POST['tema'] ?? 0),
+                'status' => (int)($_POST['status'] ?? 0)
+            ];
+            if ($dados['enunciado'] && $dados['curso'] && $dados['resposta'] && $dados['disciplina'] && $dados['tema'] && $dados['status']) {
+                $this->modelo->atualizar($id, $dados);
+                header('Location: ?rota=pergunta_listar');
+                exit;
+            }
+        }
+        require __DIR__ . '/../../visoes/admin/pergunta/editar.php';
+    }
+
+    public function excluir()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $this->modelo->excluir($id);
+        header('Location: ?rota=pergunta_listar');
+        exit;
     }
 }

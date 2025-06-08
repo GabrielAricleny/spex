@@ -2,6 +2,9 @@
 
 namespace App\controladores\admin;
 
+// Corrija o caminho do ModeloUniversidade:
+require_once __DIR__ . '/../../Modelos/ModeloUniversidade.php';
+
 use App\Modelos\ModeloUniversidade;
 
 class ControladorUniversidade
@@ -10,6 +13,7 @@ class ControladorUniversidade
 
     public function __construct()
     {
+        // Corrija a obtenção da conexão para garantir que retorna um PDO
         $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
         $this->modelo = new ModeloUniversidade($conexao);
     }

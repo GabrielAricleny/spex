@@ -1,5 +1,5 @@
 <?php
-$paginaAtual = 'universidade';
+$paginaAtual = 'tema';
 // Proteção: só admins podem acessar
 include __DIR__ . '/../protecao_admin.php';
 ?>
@@ -29,7 +29,7 @@ include __DIR__ . '/../protecao_admin.php';
     overflow-x: auto;
 }
 .table.is-striped.is-hoverable.is-fullwidth {
-    min-width: 700px;
+    min-width: 600px;
     width: 100%;
     background: #23272b;
     color: #fff;
@@ -47,11 +47,11 @@ include __DIR__ . '/../protecao_admin.php';
     <div class="painel-admin-container">
         <div class="painel-centralizado">
             <div class="tabela-bg">
-                <h2 class="title has-text-centered has-text-link-light">Lista de Universidades</h2>
+                <h2 class="title has-text-centered has-text-link-light">Temas</h2>
                 <div style="width:100%; display:flex; justify-content:flex-end; margin-bottom:24px;">
-                    <a href="?rota=universidades_criar" class="button is-primary is-small">
+                    <a href="?rota=tema_criar" class="button is-primary is-small">
                         <span class="icon"><i class="fas fa-plus"></i></span>
-                        <span>Nova Universidade</span>
+                        <span>Novo Tema</span>
                     </a>
                 </div>
                 <div class="table-container">
@@ -60,28 +60,26 @@ include __DIR__ . '/../protecao_admin.php';
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>Abreviado</th>
                                 <th>Criada em</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($universidades)): ?>
-                                <?php foreach ($universidades as $universidade): ?>
+                            <?php if (!empty($temas)): ?>
+                                <?php foreach ($temas as $tema): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($universidade['id_universidade']) ?></td>
-                                        <td><?= htmlspecialchars($universidade['nome_universidade']) ?></td>
-                                        <td><?= htmlspecialchars($universidade['nome_abreviado']) ?></td>
-                                        <td><?= htmlspecialchars($universidade['criada_em']) ?></td>
+                                        <td><?= htmlspecialchars($tema['id_tema']) ?></td>
+                                        <td><?= htmlspecialchars($tema['nome_tema']) ?></td>
+                                        <td><?= htmlspecialchars($tema['criada_em'] ?? '') ?></td>
                                         <td>
-                                            <a href="?rota=universidades_editar&id=<?= $universidade['id_universidade'] ?>" class="button is-warning is-small">
+                                            <a href="?rota=tema_editar&id=<?= $tema['id_tema'] ?>" class="button is-warning is-small">
                                                 <span class="icon"><i class="fas fa-edit"></i></span>
                                                 <span>Editar</span>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="?rota=universidades_excluir&id=<?= $universidade['id_universidade'] ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar esta universidade?')">
+                                            <a href="?rota=tema_excluir&id=<?= $tema['id_tema'] ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar este tema?')">
                                                 <span class="icon"><i class="fas fa-trash"></i></span>
                                                 <span>Eliminar</span>
                                             </a>
@@ -90,7 +88,7 @@ include __DIR__ . '/../protecao_admin.php';
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="6" class="has-text-centered">Nenhuma universidade encontrada.</td>
+                                    <td colspan="5" class="has-text-centered">Nenhum tema cadastrado.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'nivel_acesso'; ?>
+<?php
+$paginaAtual = 'nivel_acesso';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
@@ -17,6 +21,9 @@ body, html {
     box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     width: 100%;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .form-label {
     color: #f8f9fa;
@@ -64,8 +71,8 @@ body, html {
         <div class="painel-centralizado" style="max-width:600px; margin:auto;">
             <h2 class="title has-text-centered has-text-link-light">Editar Nível de Acesso</h2>
             <form method="post">
-                <label class="form-label">Nome</label>
-                <input type="text" name="nome" class="form-control" value="<?= htmlspecialchars($nivelAcesso->nome ?? '') ?>" required>
+                <label class="form-label" for="descricao">Descrição</label>
+                <input type="text" id="descricao" name="descricao" class="form-control" value="<?= htmlspecialchars($nivel['descricao'] ?? '') ?>" required>
                 <div style="display:flex; gap:8px; justify-content:flex-end;">
                     <button type="submit" class="button is-success">Salvar</button>
                     <a href="?rota=crud_nivel_acesso" class="button is-light">Cancelar</a>

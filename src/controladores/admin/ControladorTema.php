@@ -3,57 +3,61 @@ declare(strict_types=1);
 
 namespace App\controladores\admin;
 
-use App\servicos\TemaServico;
+use App\Modelos\ModeloTema;
 
 class ControladorTema
 {
-    protected $servico;
+    private ModeloTema $modelo;
 
     public function __construct()
     {
-        $this->servico = new TemaServico();
+        $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
+        $this->modelo = new ModeloTema($conexao);
     }
 
-    public function crud()
+    public function listar()
     {
-        $acao = $_GET['acao'] ?? 'listar';
-        $id = $_GET['id'] ?? null;
+        $temas = $this->modelo->listar();
+        require __DIR__ . '/../../visoes/admin/tema/listar.php';
+    }
 
-        switch ($acao) {
-            case 'criar':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->criar($dados);
-                    header('Location: ?rota=crud_tema');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/tema/criar.php';
-                break;
-
-            case 'editar':
-                $tema = $this->servico->buscarPorId($id);
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->atualizar($id, $dados);
-                    header('Location: ?rota=crud_tema');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/tema/editar.php';
-                break;
-
-            case 'deletar':
-                $this->servico->deletar($id);
-                header('Location: ?rota=crud_tema');
+    public function criar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nome = trim($_POST['nome_tema'] ?? '');
+            if ($nome) {
+                $this->modelo->criar($nome);
+                header('Location: ?rota=tema_listar');
                 exit;
-
-            default:
-                $temas = $this->servico->listarTodos();
-                include __DIR__ . '/../../visoes/admin/tema/listar.php';
-                break;
+            }
         }
+        require __DIR__ . '/../../visoes/admin/tema/criar.php';
+    }
+
+    public function editar()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $tema = $this->modelo->buscarPorId($id);
+        if (!$tema) {
+            header('Location: ?rota=tema_listar');
+            exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nome = trim($_POST['nome_tema'] ?? '');
+            if ($nome) {
+                $this->modelo->atualizar($id, $nome);
+                header('Location: ?rota=tema_listar');
+                exit;
+            }
+        }
+        require __DIR__ . '/../../visoes/admin/tema/editar.php';
+    }
+
+    public function excluir()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $this->modelo->excluir($id);
+        header('Location: ?rota=tema_listar');
+        exit;
     }
 }

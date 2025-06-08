@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'nivel_acesso'; ?>
+<?php
+$paginaAtual = 'nivel_acesso';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
@@ -31,7 +35,7 @@ body, html {
         padding: 32px 0;
     }
     .table.is-striped.is-hoverable.is-fullwidth {
-        min-width: 900px; /* Use pixels, não % */
+        min-width: 900px;
         width: 100%;
         font-size: 15px;
     }

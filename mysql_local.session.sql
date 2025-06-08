@@ -1,1 +1,1 @@
-SELECT * FROM disciplina;
+DESCRIBE pergunta;

@@ -1,5 +1,5 @@
 <?php
-$paginaAtual = 'universidade';
+$paginaAtual = 'tema';
 // Proteção: só admins podem acessar
 include __DIR__ . '/../protecao_admin.php';
 ?>
@@ -30,20 +30,12 @@ include __DIR__ . '/../protecao_admin.php';
     <div class="painel-admin-container">
         <div class="painel-centralizado">
             <div class="tabela-bg">
-                <h2 class="title has-text-centered has-text-link-light">Editar Universidade</h2>
+                <h2 class="title has-text-centered has-text-link-light">Novo Tema</h2>
                 <form method="post" style="max-width: 400px; margin: 0 auto;">
                     <div class="field">
-                        <label class="label has-text-light">Nome da Universidade</label>
+                        <label class="label has-text-light">Nome do Tema</label>
                         <div class="control">
-                            <input class="input" type="text" name="nome_universidade"
-                                   value="<?= htmlspecialchars($universidade['nome_universidade']) ?>" required autofocus>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label has-text-light">Nome Abreviado</label>
-                        <div class="control">
-                            <input class="input" type="text" name="nome_abreviado"
-                                   value="<?= htmlspecialchars($universidade['nome_abreviado']) ?>" maxlength="30" required>
+                            <input class="input" type="text" name="nome_tema" required autofocus>
                         </div>
                     </div>
                     <div class="field is-grouped is-grouped-right mt-5">
@@ -54,7 +46,7 @@ include __DIR__ . '/../protecao_admin.php';
                             </button>
                         </div>
                         <div class="control">
-                            <a href="?rota=universidades_listar" class="button is-light">Cancelar</a>
+                            <a href="?rota=tema_listar" class="button is-light">Cancelar</a>
                         </div>
                     </div>
                 </form>

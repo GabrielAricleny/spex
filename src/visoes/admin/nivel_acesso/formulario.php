@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'nivel_acesso'; ?>
+<?php
+$paginaAtual = 'nivel_acesso';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php require __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 

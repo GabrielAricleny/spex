@@ -2,6 +2,9 @@
 $paginaCss = ['inicio'];
 $paginaJs  = [];
 
+// Proteção: só admins podem acessar
+include __DIR__ . '/protecao_admin.php';
+
 require_once __DIR__ . '/../templates/cabecalho.php';
 require_once __DIR__ . '/../../config/conexao_basedados.php';
 
@@ -119,7 +122,7 @@ body, html {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     border: none;
-    min-height: 180px;           /* altura mínima igual para todos */
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -156,8 +159,6 @@ body, html {
     color: #fff !important;
     text-decoration: underline;
 }
-
-/* Efeito hover igual ao rodapé para links do sidebar */
 .sidebar-link {
     transition: color 0.2s, background 0.2s;
 }
@@ -167,8 +168,6 @@ body, html {
     background: rgba(255,255,255,0.04);
     text-decoration: underline;
 }
-
-/* Efeito hover igual ao cabeçalho para links "Gerir" dos cards */
 .card-footer-item.gerir-link {
     transition: color 0.2s, background 0.2s;
     background: #23272f !important;
@@ -185,11 +184,9 @@ body, html {
     text-decoration: none;
     box-shadow: 0 2px 8px rgba(50,115,220,0.10);
 }
-
-/* Sidebar fixo */
 .sidebar-fixo {
     position: fixed;
-    top: 64px; /* ajuste conforme altura do seu cabeçalho */
+    top: 64px;
     left: 0;
     height: calc(100vh - 64px);
     width: 260px;
@@ -214,7 +211,7 @@ body, html {
 }
 @media (min-width: 1024px) {
     .painel-admin-container {
-        margin-left: 260px; /* largura do sidebar */
+        margin-left: 260px;
         max-width: 1400px;
         padding-right: 32px;
         padding-left: 32px;
@@ -239,7 +236,31 @@ body, html {
         <div class="box" style="border-radius: 10px;">
             <h1 class="title is-3 has-text-link has-text-centered mb-5">Painel de Administração</h1>
             <div class="columns is-multiline">
-                <?php foreach ($resumos as $tabela => $dados): ?>
+                <?php
+                // Rotas para cada card, igual ao sidebar
+                $rotas = [
+                    'nivel_acesso' => 'crud_nivel_acesso',
+                    'usuario' => 'crud_usuario',
+                    'administrador' => 'crud_administrador',
+                    'estudante' => 'crud_estudante',
+                    'curso' => 'crud_curso',
+                    'exame_sistema' => 'crud_exame_sistema',
+                    'exame_universidade' => 'crud_exame_universidade',
+                    'universidade' => 'universidades_listar',
+                    'disciplina' => 'disciplinas_listar',
+                    'disciplina_curso' => 'crud_disciplina_curso',
+                    'tema' => 'tema_listar',
+                    'status_pergunta' => 'status_pergunta_listar',
+                    'pergunta' => 'pergunta_listar',
+                    'lista_perguntas_exame_universidade' => 'crud_lista_perguntas_exame_universidade',
+                    'lista_perguntas_exame_sistema' => 'crud_lista_perguntas_exame_sistema',
+                    'historico_aluno' => 'crud_historico_aluno',
+                    'exame_sistema_realizado' => 'crud_exame_sistema_realizado',
+                    'exame_universidade_realizado' => 'crud_exame_universidade_realizado',
+                    'resultado_exame' => 'crud_resultado_exame',
+                    'pergunta_acertada_exame_sistema' => 'crud_pergunta_acertada_exame_sistema',
+                ];
+                foreach ($resumos as $tabela => $dados): ?>
                     <div class="column is-one-third">
                         <div class="card" style="border-radius: 8px;">
                             <div class="card-content has-text-centered">
@@ -247,10 +268,7 @@ body, html {
                                 <p class="subtitle is-6"><?= $dados['titulo'] ?></p>
                             </div>
                             <footer class="card-footer">
-                                <a href="?rota=<?= 
-    $tabela === 'disciplina' ? 'disciplinas_listar' : 
-    ($tabela === 'universidade' ? 'universidades_listar' : 'crud_' . $tabela) 
-?>" class="card-footer-item gerir-link">Gerir</a>
+                                <a href="?rota=<?= $rotas[$tabela] ?? ('crud_' . $tabela) ?>" class="card-footer-item gerir-link">Gerir</a>
                             </footer>
                         </div>
                     </div>

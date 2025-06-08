@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'usuario'; ?>
+<?php
+$paginaAtual = 'usuario';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
@@ -153,8 +157,7 @@ document.getElementById('nivel-acesso').addEventListener('change', function() {
         camposEstudante.style.display = 'none';
         camposEstudante.querySelectorAll('input').forEach(function(input) {
             input.required = false;
-            // Remova esta linha para NÃO limpar os valores:
-            // input.value = '';
+            // Não limpar os valores dos campos ao trocar o tipo de usuário
         });
     }
 });

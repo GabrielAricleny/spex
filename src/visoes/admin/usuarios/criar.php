@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'usuario'; ?>
+<?php
+$paginaAtual = 'usuario';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 

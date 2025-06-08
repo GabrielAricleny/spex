@@ -13,20 +13,22 @@
         'nivel_acesso' => ['titulo' => 'Níveis de Acesso', 'total' => obterTotal('nivel_acesso')],
         'usuario' => ['titulo' => 'Usuários', 'total' => obterTotal('usuario')],
         'administrador' => ['titulo' => 'Administradores', 'total' => obterTotal('administrador')],
+        'estudante' => ['titulo' => 'Estudantes', 'total' => obterTotal('estudante')],
         'curso' => ['titulo' => 'Cursos', 'total' => obterTotal('curso')],
         'exame_sistema' => ['titulo' => 'Exames do Sistema', 'total' => obterTotal('exame_sistema')],
-        'exame_sistema_realizado' => ['titulo' => 'Exames do Sistema Realizados', 'total' => obterTotal('exame_sistema_realizado')],
-        'historico_aluno_exame_sistema' => ['titulo' => 'Histórico de Aluno em Exames do Sistema', 'total' => obterTotal('historico_aluno_exame_sistema')],
-        'estudante' => ['titulo' => 'Estudantes', 'total' => obterTotal('estudante')],
-        'universidade' => ['titulo' => 'Universidades', 'total' => obterTotal('universidade')],
         'exame_universidade' => ['titulo' => 'Exames de Universidade', 'total' => obterTotal('exame_universidade')],
+        'universidade' => ['titulo' => 'Universidades', 'total' => obterTotal('universidade')],
         'disciplina' => ['titulo' => 'Disciplinas', 'total' => obterTotal('disciplina')],
         'disciplina_curso' => ['titulo' => 'Disciplinas por Curso', 'total' => obterTotal('disciplina_curso')],
         'tema' => ['titulo' => 'Temas', 'total' => obterTotal('tema')],
         'status_pergunta' => ['titulo' => 'Status das Perguntas', 'total' => obterTotal('status_pergunta')],
-        'pergunta_cadastrada' => ['titulo' => 'Perguntas Cadastradas', 'total' => obterTotal('pergunta_cadastrada')],
+        'pergunta' => ['titulo' => 'Perguntas', 'total' => obterTotal('pergunta')],
         'lista_perguntas_exame_universidade' => ['titulo' => 'Perguntas em Exames de Universidade', 'total' => obterTotal('lista_perguntas_exame_universidade')],
         'lista_perguntas_exame_sistema' => ['titulo' => 'Perguntas em Exames do Sistema', 'total' => obterTotal('lista_perguntas_exame_sistema')],
+        'historico_aluno' => ['titulo' => 'Histórico de Aluno', 'total' => obterTotal('historico_aluno')],
+        'exame_sistema_realizado' => ['titulo' => 'Exames do Sistema Realizados', 'total' => obterTotal('exame_sistema_realizado')],
+        'exame_universidade_realizado' => ['titulo' => 'Exames de Universidade Realizados', 'total' => obterTotal('exame_universidade_realizado')],
+        'resultado_exame' => ['titulo' => 'Resultados de Exames', 'total' => obterTotal('resultado_exame')],
         'pergunta_acertada_exame_sistema' => ['titulo' => 'Perguntas Acertadas em Exames do Sistema', 'total' => obterTotal('pergunta_acertada_exame_sistema')],
     ];
 } ?>
@@ -85,8 +87,34 @@ body, html {
         <p class="panel-heading is-hidden-mobile">
             Tabelas do Sistema
         </p>
-        <?php foreach ($resumos as $tabela => $dados): ?>
-            <a href="?rota=crud_<?= $tabela ?>" class="panel-block">
+        <?php
+        // Rotas específicas para cada tabela, igual ao painel_admin.php
+        $rotas = [
+            'nivel_acesso' => 'crud_nivel_acesso',
+            'usuario' => 'crud_usuario',
+            'administrador' => 'crud_administrador',
+            'estudante' => 'crud_estudante',
+            'curso' => 'crud_curso',
+            'exame_sistema' => 'crud_exame_sistema',
+            'exame_universidade' => 'crud_exame_universidade',
+            'universidade' => 'universidades_listar',
+            'disciplina' => 'disciplinas_listar',
+            'disciplina_curso' => 'crud_disciplina_curso',
+            'tema' => 'tema_listar',
+            'status_pergunta' => 'status_pergunta_listar',
+            'pergunta' => 'pergunta_listar',
+            'lista_perguntas_exame_universidade' => 'crud_lista_perguntas_exame_universidade',
+            'lista_perguntas_exame_sistema' => 'crud_lista_perguntas_exame_sistema',
+            'historico_aluno' => 'crud_historico_aluno',
+            'exame_sistema_realizado' => 'crud_exame_sistema_realizado',
+            'exame_universidade_realizado' => 'crud_exame_universidade_realizado',
+            'resultado_exame' => 'crud_resultado_exame',
+            'pergunta_acertada_exame_sistema' => 'crud_pergunta_acertada_exame_sistema',
+        ];
+        foreach ($resumos as $tabela => $dados): 
+            $rota = $rotas[$tabela] ?? 'crud_' . $tabela;
+        ?>
+            <a href="?rota=<?= $rota ?>" class="panel-block">
                 <span class="panel-icon">
                     <i class="fas fa-database"></i>
                 </span>
@@ -100,4 +128,4 @@ body, html {
             Voltar ao Painel Admin
         </a>
     </nav>
-</div>
+</div></a>

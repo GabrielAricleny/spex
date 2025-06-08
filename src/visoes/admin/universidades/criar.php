@@ -1,9 +1,12 @@
-<?php $paginaAtual = 'universidade'; ?>
+<?php
+$paginaAtual = 'universidade';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
 <style>
-/* ... mesmo CSS responsivo das outras views ... */
 @media (min-width: 1024px) {
     .painel-admin-container { margin-left: 260px; max-width: 1400px; padding-right: 32px; padding-left: 32px; margin-right: auto; margin-top: 0; }
     .tabela-bg { padding: 32px 48px; }

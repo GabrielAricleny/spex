@@ -2,63 +2,61 @@
 
 namespace App\controladores\admin;
 
-use App\servicos\StatusPerguntaServico;
+use App\Modelos\ModeloStatusPergunta;
 
 class ControladorStatusPergunta
 {
-    protected $servico;
+    private ModeloStatusPergunta $modelo;
 
     public function __construct()
     {
-        $this->servico = new StatusPerguntaServico();
+        $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
+        $this->modelo = new ModeloStatusPergunta($conexao);
     }
 
-    public function crud()
+    public function listar()
     {
-        $acao = $_GET['acao'] ?? 'listar';
-        $id = $_GET['id'] ?? null;
+        $statusPerguntas = $this->modelo->listar();
+        require __DIR__ . '/../../visoes/admin/status_pergunta/listar.php';
+    }
 
-        switch ($acao) {
-            case 'criar':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->criar($dados);
-                    header('Location: ?rota=crud_status_pergunta');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/status_pergunta/criar.php';
-                break;
-
-            case 'editar':
-                if (!$id) {
-                    header('Location: ?rota=crud_status_pergunta');
-                    exit;
-                }
-                $statusPergunta = $this->servico->buscarPorId($id);
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $dados = [
-                        'nome' => $_POST['nome'] ?? '',
-                    ];
-                    $this->servico->atualizar($id, $dados);
-                    header('Location: ?rota=crud_status_pergunta');
-                    exit;
-                }
-                include __DIR__ . '/../../visoes/admin/status_pergunta/editar.php';
-                break;
-
-            case 'deletar':
-                if ($id) {
-                    $this->servico->deletar($id);
-                }
-                header('Location: ?rota=crud_status_pergunta');
+    public function criar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $descricao = trim($_POST['descricao_status'] ?? '');
+            if ($descricao) {
+                $this->modelo->criar($descricao);
+                header('Location: ?rota=status_pergunta_listar');
                 exit;
-
-            default:
-                $statusPerguntas = $this->servico->listarTodos();
-                include __DIR__ . '/../../visoes/admin/status_pergunta/listar.php';
-                break;
+            }
         }
+        require __DIR__ . '/../../visoes/admin/status_pergunta/criar.php';
+    }
+
+    public function editar()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $status = $this->modelo->buscarPorId($id);
+        if (!$status) {
+            header('Location: ?rota=status_pergunta_listar');
+            exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $descricao = trim($_POST['descricao_status'] ?? '');
+            if ($descricao) {
+                $this->modelo->atualizar($id, $descricao);
+                header('Location: ?rota=status_pergunta_listar');
+                exit;
+            }
+        }
+        require __DIR__ . '/../../visoes/admin/status_pergunta/editar.php';
+    }
+
+    public function excluir()
+    {
+        $id = (int)($_GET['id'] ?? 0);
+        $this->modelo->excluir($id);
+        header('Location: ?rota=status_pergunta_listar');
+        exit;
     }
 }

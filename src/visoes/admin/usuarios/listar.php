@@ -1,4 +1,8 @@
-<?php $paginaAtual = 'usuario'; ?>
+<?php
+$paginaAtual = 'usuario';
+// Proteção: só admins podem acessar
+include __DIR__ . '/../protecao_admin.php';
+?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
@@ -21,7 +25,7 @@ body, html {
     background: #23272b;
     border-radius: 12px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.15);
-    padding: 32px 32px; /* padding igual em todos os lados */
+    padding: 32px 32px;
     width: 100%;
     max-width: 100%;
     transition: padding 0.2s;
@@ -37,13 +41,13 @@ body, html {
         margin-top: 0;
     }
     .tabela-bg {
-        padding: 32px 48px; /* mais espaço lateral em desktop */
+        padding: 32px 48px;
     }
     .table.is-striped.is-hoverable.is-fullwidth {
         width: 100%;
         font-size: 15px;
         table-layout: auto;
-        min-width: 0; /* remove restrição de largura mínima */
+        min-width: 0;
     }
 }
 @media (max-width: 1023px) {
