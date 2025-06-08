@@ -56,17 +56,17 @@ input, select, .input, .select select {
     margin-right: auto;
     margin-top: 0;
 }
-@media (max-width: 900px) {
-    .tabela-bg {
-        padding: 16px 4px;
-    }
-}
 @media (max-width: 1023px) {
     .painel-admin-container {
         margin-left: 0 !important;
         padding-left: 8px;
         padding-right: 8px;
         max-width: 100vw;
+    }
+}
+@media (max-width: 900px) {
+    .tabela-bg {
+        padding: 16px 4px;
     }
 }
 </style>
@@ -77,8 +77,8 @@ input, select, .input, .select select {
             <div class="tabela-bg">
                 <h2 class="title is-4 has-text-centered has-text-link-light" style="margin-bottom: 2rem;">
                     <span class="icon-text">
-                        <span class="icon"><i class="fas fa-edit"></i></span>
-                        <span>Editar Relação Disciplina/Curso</span>
+                        <span class="icon"><i class="fas fa-plus"></i></span>
+                        <span>Nova Relação Disciplina/Curso</span>
                     </span>
                 </h2>
                 <form method="post" style="max-width: 400px; margin: 0 auto;">
@@ -89,9 +89,7 @@ input, select, .input, .select select {
                                 <select name="id_curso" required>
                                     <option value="">Selecione...</option>
                                     <?php foreach ($cursos as $curso): ?>
-                                        <option value="<?= $curso['id_curso'] ?>" <?= $curso['id_curso'] == $relacao['id_curso'] ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($curso['nome_curso']) ?>
-                                        </option>
+                                        <option value="<?= $curso['id_curso'] ?>"><?= htmlspecialchars($curso['nome_curso']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -104,9 +102,7 @@ input, select, .input, .select select {
                                 <select name="id_disciplina" required>
                                     <option value="">Selecione...</option>
                                     <?php foreach ($disciplinas as $disciplina): ?>
-                                        <option value="<?= $disciplina['id_disciplina'] ?>" <?= $disciplina['id_disciplina'] == $relacao['id_disciplina'] ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($disciplina['nome_disciplina']) ?>
-                                        </option>
+                                        <option value="<?= $disciplina['id_disciplina'] ?>"><?= htmlspecialchars($disciplina['nome_disciplina']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

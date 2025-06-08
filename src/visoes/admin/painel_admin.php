@@ -237,7 +237,7 @@ body, html {
             <h1 class="title is-3 has-text-link has-text-centered mb-5">Painel de Administração</h1>
             <div class="columns is-multiline">
                 <?php
-                // Rotas para cada card, igual ao sidebar
+                // Rotas RESTful atualizadas para cada card
                 $rotas = [
                     'nivel_acesso' => 'crud_nivel_acesso',
                     'usuario' => 'crud_usuario',
@@ -248,7 +248,7 @@ body, html {
                     'exame_universidade' => 'crud_exame_universidade',
                     'universidade' => 'universidades_listar',
                     'disciplina' => 'disciplinas_listar',
-                    'disciplina_curso' => 'crud_disciplina_curso',
+                    'disciplina_curso' => 'disciplina_curso_listar', // <-- Atualizado para RESTful
                     'tema' => 'tema_listar',
                     'status_pergunta' => 'status_pergunta_listar',
                     'pergunta' => 'pergunta_listar',

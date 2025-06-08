@@ -99,7 +99,7 @@ body, html {
             'exame_universidade' => 'crud_exame_universidade',
             'universidade' => 'universidades_listar',
             'disciplina' => 'disciplinas_listar',
-            'disciplina_curso' => 'crud_disciplina_curso',
+            'disciplina_curso' => 'disciplina_curso_listar', // <-- Atualizado para RESTful
             'tema' => 'tema_listar',
             'status_pergunta' => 'status_pergunta_listar',
             'pergunta' => 'pergunta_listar',

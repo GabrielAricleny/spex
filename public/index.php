@@ -36,7 +36,6 @@ use App\controladores\admin\ControladorDisciplina;
 use App\controladores\admin\ControladorDisciplinaCurso;
 use App\controladores\admin\ControladorTema;
 use App\controladores\admin\ControladorStatusPergunta;
-// use App\controladores\admin\ControladorPerguntaCadastrada; // Removido porque a classe não existe
 use App\controladores\admin\ControladorListaPerguntasExameUniversidade;
 use App\controladores\admin\ControladorListaPerguntasExameSistema;
 use App\controladores\admin\ControladorPerguntaAcertadaExameSistema;
@@ -82,17 +81,6 @@ $roteador->adicionar(['GET', 'POST'], 'status_pergunta_criar', fn() => (new Cont
 $roteador->adicionar(['GET', 'POST'], 'status_pergunta_editar', fn() => (new ControladorStatusPergunta())->editar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET'], 'status_pergunta_excluir', fn() => (new ControladorStatusPergunta())->excluir(), ['autenticadoAdmin']);
 
-// ==================== OUTRAS TABELAS DO ADMIN ====================
-$roteador->adicionar(['GET', 'POST'], 'crud_exame_sistema', fn() => (new ControladorExameSistema())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_exame_sistema_realizado', fn() => (new ControladorExameSistemaRealizado())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_exame_universidade', fn() => (new ControladorExameUniversidade())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_disciplina_curso', fn() => (new ControladorDisciplinaCurso())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_tema', fn() => (new ControladorTema())->listar(), ['autenticadoAdmin']);
-// $roteador->adicionar(['GET', 'POST'], 'crud_pergunta_cadastrada', fn() => (new ControladorPerguntaCadastrada())->crud(), ['autenticadoAdmin']); // Removido porque a classe não existe
-$roteador->adicionar(['GET', 'POST'], 'crud_lista_perguntas_exame_universidade', fn() => (new ControladorListaPerguntasExameUniversidade())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_lista_perguntas_exame_sistema', fn() => (new ControladorListaPerguntasExameSistema())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_pergunta_acertada_exame_sistema', fn() => (new ControladorPerguntaAcertadaExameSistema())->crud(), ['autenticadoAdmin']);
-
 // ==================== ESTUDANTE ====================
 $roteador->adicionar(['GET'], 'login_estudante', fn() => (new ControladorLoginEstudante())->mostrarFormulario());
 $roteador->adicionar(['POST'], 'autenticar_estudante', fn() => (new ControladorLoginEstudante())->processarLogin());
@@ -112,6 +100,12 @@ $roteador->adicionar(['GET'], 'pergunta_listar', fn() => (new ControladorPergunt
 $roteador->adicionar(['GET', 'POST'], 'pergunta_criar', fn() => (new ControladorPergunta())->criar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'pergunta_editar', fn() => (new ControladorPergunta())->editar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET'], 'pergunta_excluir', fn() => (new ControladorPergunta())->excluir(), ['autenticadoAdmin']);
+
+// ==================== DISCIPLINA_CURSO ====================
+$roteador->adicionar(['GET'], 'disciplina_curso_listar', fn() => (new ControladorDisciplinaCurso())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'disciplina_curso_criar', fn() => (new ControladorDisciplinaCurso())->criar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'disciplina_curso_editar', fn() => (new ControladorDisciplinaCurso())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'disciplina_curso_excluir', fn() => (new ControladorDisciplinaCurso())->excluir(), ['autenticadoAdmin']);
 
 // ==================== ROTEAMENTO ====================
 $rota = $_GET['rota'] ?? 'inicio';
