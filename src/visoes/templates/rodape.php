@@ -10,19 +10,28 @@
 
 </body>
 
-<footer class="footer has-background-dark has-text-light">
+<style>
+@media (min-width: 1024px) {
+    .painel-admin-container > .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+</style>
+
+<footer class="footer has-background-dark has-text-light painel-admin-container">
     <div class="container">
         <div class="columns is-variable is-6 is-multiline">
 
             <!-- Sobre o SPEX -->
-            <div class="column is-5-tablet is-3-desktop">
+            <div class="column is-3 is-one-quarter">
                 <p class="title is-6 has-text-light">Sobre o SPEX</p>
                 <p>O SPEX é uma plataforma angolana dedicada à preparação eficaz para os exames de acesso ao Ensino Superior. Oferece uma base de dados de exames, aulas em modo-texto e outros recursos de estudo.</p>
                 <p class="mt-2">Desenvolvido por: <span style="color:#fff; font-weight:bold;">Team PCGG</span><br>[Paula, Celestina, Gracieth, Gabriel]</p>
             </div>
 
             <!-- Links Rápidos -->
-            <div class="column is-5-tablet is-3-desktop">
+            <div class="column is-3 is-one-quarter">
                 <p class="title is-6 has-text-light">Links Rápidos</p>
                 <ul>
                     <li><a href="?rota=inicio" class="has-text-light">Página Inicial</a></li>
@@ -34,7 +43,7 @@
             </div>
 
             <!-- Ajuda e Recursos -->
-            <div class="column is-5-tablet is-3-desktop">
+            <div class="column is-3 is-one-quarter">
                 <p class="title is-6 has-text-light">Ajuda e Recursos</p>
                 <ul>
                     <li><a href="?rota=faq" class="has-text-light">Perguntas Frequentes</a></li>
@@ -45,7 +54,7 @@
             </div>
 
             <!-- Institucional e Legal -->
-            <div class="column is-5-tablet is-3-desktop">
+            <div class="column is-3 is-one-quarter">
                 <p class="title is-6 has-text-light">Informações Legais</p>
                 <ul>
                     <li><a href="?rota=termos" class="has-text-light">Termos de Uso</a></li>

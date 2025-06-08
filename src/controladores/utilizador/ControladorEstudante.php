@@ -49,31 +49,31 @@ class ControladorEstudante
 
     public function dashboard()
     {
-        if (!isset($_SESSION['estudante'])) {
-            header('Location: ?rota=login_estudante');
+        if (!isset($_SESSION['utilizador'])) {
+            header('Location: ?rota=inicio');
             exit;
         }
-        $estudante = $_SESSION['estudante'];
+        $estudante = $_SESSION['utilizador'];
         include __DIR__ . '/../../visoes/utilizador/dashboard_estudante.php';
     }
 
     public function perfil()
     {
-        if (!isset($_SESSION['estudante'])) {
+        if (!isset($_SESSION['utilizador'])) {
             header('Location: ?rota=login_estudante');
             exit;
         }
-        $estudante = $_SESSION['estudante'];
+        $estudante = $_SESSION['utilizador'];
         include __DIR__ . '/../../visoes/utilizador/perfil_estudante.php';
     }
 
     public function meusResultados()
     {
-        if (!isset($_SESSION['estudante'])) {
+        if (!isset($_SESSION['utilizador'])) {
             header('Location: ?rota=login_estudante');
             exit;
         }
-        $estudante = $_SESSION['estudante'];
+        $estudante = $_SESSION['utilizador'];
         $servico = new EstudanteServico();
         $resultados = $servico->buscarResultados($estudante['id_usuario'] ?? null);
         include __DIR__ . '/../../visoes/utilizador/meus_resultados.php';
@@ -81,9 +81,9 @@ class ControladorEstudante
 
     public function terminarSessao()
     {
-        unset($_SESSION['estudante']);
+        unset($_SESSION['utilizador']);
         session_destroy();
-        header('Location: ?rota=login_estudante');
+        header('Location: ?rota=inicio');
         exit;
     }
 }

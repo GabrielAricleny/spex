@@ -65,9 +65,12 @@ $roteador->adicionar(['GET', 'POST'], 'crud_exame_sistema', fn() => (new Control
 $roteador->adicionar(['GET', 'POST'], 'crud_exame_sistema_realizado', fn() => (new ControladorExameSistemaRealizado())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_historico_aluno_exame_sistema', fn() => (new ControladorHistoricoAlunoExameSistema())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_estudante', fn() => (new ControladorEstudante())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_universidade', fn() => (new ControladorUniversidade())->crud(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'crud_universidade', fn() => (new ControladorUniversidade())->listar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_exame_universidade', fn() => (new ControladorExameUniversidade())->crud(), ['autenticadoAdmin']);
-$roteador->adicionar(['GET', 'POST'], 'crud_disciplina', fn() => (new ControladorDisciplina())->crud(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET'], 'listar_disciplina', fn() => (new ControladorDisciplina())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'criar_disciplina', fn() => (new ControladorDisciplina())->criar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'editar_disciplina', fn() => (new ControladorDisciplina())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET'], 'excluir_disciplina', fn() => (new ControladorDisciplina())->excluir(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_disciplina_curso', fn() => (new ControladorDisciplinaCurso())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_tema', fn() => (new ControladorTema())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_status_pergunta', fn() => (new ControladorStatusPergunta())->crud(), ['autenticadoAdmin']);
@@ -85,6 +88,18 @@ $roteador->adicionar(['GET'], 'sair_estudante', fn() => (new ControladorLoginEst
 $roteador->adicionar(['GET'], 'dashboard_estudante', fn() => (new ControladorEstudanteUser())->dashboard(), ['autenticadoEstudante']);
 $roteador->adicionar(['GET', 'POST'], 'cadastro_estudante', fn() => (new ControladorEstudanteUser())->cadastro());
 $roteador->adicionar(['GET', 'POST'], 'registro', fn() => (new ControladorEstudanteUser())->cadastro());
+
+// Novas rotas para disciplinas
+$roteador->adicionar(['GET'], 'disciplinas_listar', fn() => (new ControladorDisciplina())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'disciplinas_criar', fn() => (new ControladorDisciplina())->criar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'disciplinas_editar', fn() => (new ControladorDisciplina())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET'], 'disciplinas_excluir', fn() => (new ControladorDisciplina())->excluir(), ['autenticadoAdmin']);
+
+// Novas rotas para universidades
+$roteador->adicionar(['GET'], 'universidades_listar', fn() => (new ControladorUniversidade())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'universidades_criar', fn() => (new ControladorUniversidade())->criar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'universidades_editar', fn() => (new ControladorUniversidade())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET'], 'universidades_excluir', fn() => (new ControladorUniversidade())->excluir(), ['autenticadoAdmin']);
 
 // Rota a partir da query string, por padrão 'inicio'
 $rota = $_GET['rota'] ?? 'inicio';

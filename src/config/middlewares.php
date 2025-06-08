@@ -14,9 +14,9 @@ function autenticadoAdmin(): void
 {
     if (
         !isset($_SESSION['utilizador']) ||
-        ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== 'admin'
+        ($_SESSION['utilizador']['nivel_acesso'] ?? null) !== 'admin'
     ) {
-        header('Location: ?rota=login_admin');
+        header('Location: ?rota=inicio');
         exit;
     }
 }
@@ -30,7 +30,7 @@ function autenticadoEstudante(): void
         !isset($_SESSION['utilizador']) ||
         ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== 'estudante'
     ) {
-        header('Location: ?rota=login_estudante');
+        header('Location: ?rota=inicio');
         exit;
     }
 }
@@ -46,7 +46,7 @@ function apenasAdmin(): void
         ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== 'admin'
     ) {
         http_response_code(403);
-        require __DIR__ . '/../visoes/templates/erro_403.php';
+        require __DIR__ . '/../visoes/templates/erro403.php';
         exit;
     }
 }
@@ -62,7 +62,7 @@ function apenasEstudante(): void
         ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== 'estudante'
     ) {
         http_response_code(403);
-        require __DIR__ . '/../visoes/templates/erro_403.php';
+        require __DIR__ . '/../visoes/templates/erro403.php';
         exit;
     }
 }

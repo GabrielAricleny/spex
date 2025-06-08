@@ -35,11 +35,14 @@ class ControladorEstudante
                     header('Location: ?rota=crud_estudante');
                     exit;
                 }
-                include __DIR__ . '/../../visoes/admin/estudante/criar.php';
+                include __DIR__ . '/../../visoes/admin/estudantes/criar.php';
                 break;
 
             case 'editar':
                 $estudante = $this->servico->buscarPorId($id);
+                // Busque o usuário correspondente
+                $usuario = \App\Modelos\Usuario::buscarPorId($estudante->id_usuario);
+                $estudante->nome_completo = $usuario ? $usuario->nome_completo : '';
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $dados = [
                         'nome_completo'     => $_POST['nome_completo'] ?? '',
@@ -57,7 +60,7 @@ class ControladorEstudante
                     header('Location: ?rota=crud_estudante');
                     exit;
                 }
-                include __DIR__ . '/../../visoes/admin/estudante/editar.php';
+                include __DIR__ . '/../../visoes/admin/estudantes/editar.php';
                 break;
 
             case 'deletar':
@@ -67,6 +70,14 @@ class ControladorEstudante
 
             default:
                 $estudantes = $this->servico->listarTodos();
+
+                // Para cada estudante, busque o usuário correspondente
+                foreach ($estudantes as &$estudante) {
+                    $usuario = \App\Modelos\Usuario::buscarPorId($estudante->id_usuario);
+                    $estudante->nome_completo = $usuario ? $usuario->nome_completo : '';
+                }
+                unset($estudante);
+
                 include __DIR__ . '/../../visoes/admin/estudantes/listar.php';
                 break;
         }

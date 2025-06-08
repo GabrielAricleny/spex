@@ -112,4 +112,17 @@ class ModeloEstudante
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Busca os dados do estudante pelo id_usuario.
+     * Retorna null se não encontrar.
+     */
+    public function buscarPorUsuarioId(int $id_usuario): ?array
+    {
+        $sql = "SELECT data_nasc, telefone, area_formacao, curso_pretendido FROM estudante WHERE id_usuario = :id_usuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
 }

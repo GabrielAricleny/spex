@@ -15,6 +15,8 @@ class Estudante
     public $nome_completo;
     public $nome_usuario;
     public $email;
+    public $criado_em;
+    public $actualizado_em;
 
     protected static function getConexao()
     {

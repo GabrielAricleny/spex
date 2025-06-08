@@ -9,7 +9,7 @@ SET @OLD_SQL_MODE = @@SQL_MODE,
 -- Schema db_spex
 -- -----------------------------------------------------
 DROP DATABASE IF EXISTS `db_spex`;
-CREATE SCHEMA IF NOT EXISTS `db_spex` DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `db_spex` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `db_spex`;
 -- -----------------------------------------------------
 -- Table nivel_acesso
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `nivel_acesso` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_nivel`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table usuario
 -- -----------------------------------------------------
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`),
   INDEX `fk_usuario_nivel_acesso_idx` (`id_nivel_acesso`),
   CONSTRAINT `fk_usuario_nivel_acesso` FOREIGN KEY (`id_nivel_acesso`) REFERENCES `nivel_acesso` (`id_nivel`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table administrador
 -- -----------------------------------------------------
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario`),
   CONSTRAINT `fk_administrador_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table estudante
 -- -----------------------------------------------------
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `estudante` (
   CONSTRAINT `fk_estudante_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario`(`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_area_formacao` FOREIGN KEY (`area_formacao`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_curso_pretendido` FOREIGN KEY (`curso_pretendido`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table curso
 -- -----------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_curso`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table exame_sistema
 -- -----------------------------------------------------
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `exame_sistema` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_exame`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table exame_universidade
 -- -----------------------------------------------------
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `exame_universidade` (
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_exame`),
   CONSTRAINT `fk_exame_universidade_universidade` FOREIGN KEY (`id_universidade`) REFERENCES `universidade` (`id_universidade`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table universidade
 -- -----------------------------------------------------
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `universidade` (
   `criada_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizada_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_universidade`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table disciplina
 -- -----------------------------------------------------
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   `criada_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizada_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_disciplina`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table disciplina_curso
 -- -----------------------------------------------------
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `disciplina_curso` (
   PRIMARY KEY (`id_disciplina`, `id_curso`),
   CONSTRAINT `fk_disciplina_curso_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_disciplina_curso_disciplina` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table tema
 -- -----------------------------------------------------
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_tema`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table status_pergunta
 -- -----------------------------------------------------
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `status_pergunta` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_status`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table pergunta
 -- -----------------------------------------------------
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `pergunta` (
   CONSTRAINT `fk_pergunta_disciplina_pergunta` FOREIGN KEY (`disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pergunta_tema_pergunta` FOREIGN KEY (`tema`) REFERENCES `tema` (`id_tema`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pergunta_status_pergunta` FOREIGN KEY (`status`) REFERENCES `status_pergunta` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table lista_perguntas_exame_universidade
 -- -----------------------------------------------------
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `lista_perguntas_exame_universidade` (
   PRIMARY KEY (`id_exame_universidade`, `id_pergunta`),
   CONSTRAINT `fk_lista_perguntas_exame_universidade_exame` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_universidade` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_lista_perguntas_exame_universidade_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table lista_perguntas_exame_sistema
 -- -----------------------------------------------------
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `lista_perguntas_exame_sistema` (
   PRIMARY KEY (`id_exame_sistema`, `id_pergunta`),
   CONSTRAINT `fk_lista_perguntas_exame_sistema_exame` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_lista_perguntas_exame_sistema_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table historico_aluno
 -- -----------------------------------------------------
@@ -207,8 +207,8 @@ CREATE TABLE IF NOT EXISTS `historico_aluno` (
   `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_historico_aluno`),
-  CONSTRAINT `fk_historico_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE -- id_exame_realizado pode referenciar exame_sistema_realizado ou exame_universidade_realizado (ver nota abaixo)
-);
+  CONSTRAINT `fk_historico_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table exame_sistema_realizado
 -- -----------------------------------------------------
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `exame_sistema_realizado` (
   PRIMARY KEY (`id_exame_realizado`),
   CONSTRAINT `fk_exame_sistema_realizado_exame_sistema` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_exame_sistema_realizado_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table exame_universidade_realizado
 -- -----------------------------------------------------
@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `exame_universidade_realizado` (
   PRIMARY KEY (`id_exame_realizado`),
   CONSTRAINT `fk_exame_universidade_realizado_exame` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_universidade` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_exame_universidade_realizado_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table resultado_exame
 -- -----------------------------------------------------
@@ -256,10 +256,8 @@ CREATE TABLE IF NOT EXISTS `resultado_exame` (
   `actualizado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_resposta`),
   CONSTRAINT `fk_resposta_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE -- id_exame_realizado pode referenciar exame_sistema_realizado ou exame_universidade_realizado (ver nota abaixo)
-);
-
-
+  CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table pergunta_acertada_exame_sistema
 -- -----------------------------------------------------
@@ -271,10 +269,9 @@ CREATE TABLE IF NOT EXISTS `pergunta_acertada_exame_sistema` (
   PRIMARY KEY (`id_exame_sistema_realizado`, `id_pergunta`),
   CONSTRAINT `fk_acerto_exame_realizado` FOREIGN KEY (`id_exame_sistema_realizado`) REFERENCES `exame_sistema_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_acerto_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
-SOURCE database/triggers.sql;
+SOURCE /var/www/spex.edu.ao/database/triggers.sql
 
 -- -----------------------------------------------------
 -- Restauração dos valores de sistema

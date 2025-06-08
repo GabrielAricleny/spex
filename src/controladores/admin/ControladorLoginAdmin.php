@@ -26,10 +26,6 @@ class ControladorLoginAdmin
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
 
-        // Debug
-        echo "Email recebido: [$email]<br>";
-        echo "Senha recebida: [$senha]<br>";
-
         $admin = ModeloAdministrador::login($email, $senha);
 
         if ($admin) {
@@ -42,8 +38,6 @@ class ControladorLoginAdmin
             exit;
         }
 
-        // Debug
-        // echo "Login falhou<br>";
         $_SESSION['erro_login'] = 'Email ou senha inválidos.';
         header('Location: ?rota=login_admin');
         exit;

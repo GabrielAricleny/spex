@@ -9,6 +9,10 @@ class ControladorLoginEstudante
 {
     public function mostrarFormulario(): void
     {
+        if (isset($_SESSION['utilizador']) && ($_SESSION['utilizador']['nivel_acesso'] ?? '') === 'estudante') {
+            header('Location: ?rota=dashboard_estudante');
+            exit;
+        }
         $paginaCss = 'inicio';
         require __DIR__ . '/../../visoes/utilizador/login_estudante.php';
     }
@@ -19,13 +23,12 @@ class ControladorLoginEstudante
         $senha = $_POST['senha_estudante'] ?? '';
 
         $conexao = require __DIR__ . '/../../config/conexao_basedados.php';
-        $modelo = new \App\Modelos\ModeloEstudante($conexao);
+        $modelo = new ModeloEstudante($conexao);
 
-        // Usa o modelo diretamente para login
         $estudante = $modelo->login($email, $senha);
 
         if ($estudante) {
-            $_SESSION['estudante'] = $estudante;
+            $_SESSION['utilizador'] = $estudante;
             header('Location: ?rota=dashboard_estudante');
             exit;
         } else {
@@ -37,9 +40,9 @@ class ControladorLoginEstudante
 
     public function terminarSessao(): void
     {
-        unset($_SESSION['estudante']);
+        unset($_SESSION['utilizador']);
         session_destroy();
-        header('Location: ?rota=login_estudante');
+        header('Location: ?rota=inicio');
         exit;
     }
 }

@@ -56,11 +56,6 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
                 <a href="?rota=sobre" class="navbar-item">Sobre o SPEX</a>
                 <a href="?rota=universidades" class="navbar-item">Universidades</a>
                 <a href="?rota=faq" class="navbar-item">Perguntas Frequentes</a>
-
-                <?php if ($utilizadorLogado && $nivelAcesso !== 'admin'): ?>
-                    <a href="?rota=dashboard_estudante" class="navbar-item">Dashboard</a>
-                    <a href="?rota=perfil_estudante" class="navbar-item">Meu Perfil</a>
-                <?php endif; ?>
             </div>
 
             <div class="navbar-end">
@@ -77,6 +72,14 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
                                     <span>Sair</span>
                                 </a>
                             <?php else: ?>
+                                <a href="?rota=dashboard_estudante" class="navbar-item">
+                                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                                    <span>Dashboard</span>
+                                </a>
+                                <a href="?rota=perfil_estudante" class="navbar-item">
+                                    <span class="icon"><i class="fas fa-user"></i></span>
+                                    <span>Meu Perfil</span>
+                                </a>
                                 <a href="?rota=sair_estudante" class="navbar-item">
                                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                                     <span>Sair</span>
@@ -94,7 +97,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
                             <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
                             <span>Entrar</span>
                         </a>
-                        <a href="?rota=login_admin" class="navbar-item" style="color:#ffb84d;">
+                        <a href="?rota=login_admin" class="navbar-item">
                             <span class="icon"><i class="fas fa-user-shield"></i></span>
                             <span>Área Administrativa</span>
                         </a>

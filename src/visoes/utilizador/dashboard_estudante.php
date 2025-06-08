@@ -2,11 +2,7 @@
 $paginaCss = 'dashboard';
 require_once __DIR__ . '/../templates/cabecalho.php';
 
-$estudante = $_SESSION['estudante'] ?? null;
-if (!$estudante) {
-    header('Location: ?rota=login_estudante');
-    exit;
-}
+$estudante = $_SESSION['utilizador'] ?? null;
 ?>
 
 <section class="section">

@@ -35,7 +35,10 @@ header {
 }
 
 .navbar-item {
-    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding-bottom: 0.1rem;
     border-bottom: 3px solid transparent;
 }
 
@@ -43,6 +46,70 @@ header {
     background-color: transparent !important;
     color: #ba55d3 !important;
     transition: var(--transition);
+}
+
+/* Corrige o espaçamento entre ícone e texto nos links do menu */
+.navbar-item .icon {
+    margin-right: 4px !important;
+    margin-left: 0 !important;
+    vertical-align: middle;
+    display: inline-block;
+}
+.navbar-item .icon + span,
+.navbar-item span.icon + span {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+.navbar-item .icon {
+    font-size: 1em;
+    line-height: 1;
+}
+
+/* NOVAS REGRAS PARA A NAVBAR */
+.navbar-end .buttons .navbar-item .icon,
+.navbar-end .buttons .navbar-item span.icon {
+    margin-right: 2px !important;
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    vertical-align: middle !important;
+    min-width: 0 !important;
+}
+.navbar-end .buttons .navbar-item .icon + span,
+.navbar-end .buttons .navbar-item span.icon + span {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+.navbar-end .buttons .navbar-item {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    gap: 0 !important;
+    padding-right: 0.5em;
+    display: flex !important;
+    align-items: center;
+    /* Alinha verticalmente ícone e texto nos links do menu */
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar-end .buttons .navbar-item .icon {
+    margin-right: 2px !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 1em;
+}
+
+.navbar-end .buttons .navbar-item span {
+    display: flex !important;
+    align-items: center !important;
+    height: 1em;
+    line-height: 1;
 }
 
 /* SECTION TITLES */

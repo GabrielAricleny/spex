@@ -1,4 +1,4 @@
-<?php $paginaAtual = 'usuario'; ?>
+<?php $paginaAtual = 'disciplina'; ?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
@@ -21,7 +21,7 @@ body, html {
     background: #23272b;
     border-radius: 12px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.15);
-    padding: 32px 32px; /* padding igual em todos os lados */
+    padding: 32px 32px;
     width: 100%;
     max-width: 100%;
     transition: padding 0.2s;
@@ -37,13 +37,13 @@ body, html {
         margin-top: 0;
     }
     .tabela-bg {
-        padding: 32px 48px; /* mais espaço lateral em desktop */
+        padding: 32px 48px;
     }
     .table.is-striped.is-hoverable.is-fullwidth {
         width: 100%;
         font-size: 15px;
         table-layout: auto;
-        min-width: 0; /* remove restrição de largura mínima */
+        min-width: 0;
     }
 }
 @media (max-width: 1023px) {
@@ -74,11 +74,11 @@ body, html {
     <div class="painel-admin-container">
         <div class="painel-centralizado">
             <div class="tabela-bg">
-                <h2 class="title has-text-centered has-text-link-light">Lista de Usuários</h2>
+                <h2 class="title has-text-centered has-text-link-light">Lista de Disciplinas</h2>
                 <div style="width:100%; display:flex; justify-content:flex-end; margin-bottom:24px;">
-                    <a href="?rota=crud_usuario&acao=criar" class="button is-primary is-small">
+                    <a href="?rota=disciplinas_criar" class="button is-primary is-small">
                         <span class="icon"><i class="fas fa-plus"></i></span>
-                        <span>Novo Usuário</span>
+                        <span>Nova Disciplina</span>
                     </a>
                 </div>
                 <div>
@@ -86,31 +86,27 @@ body, html {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome Completo</th>
-                                <th>Nome de Utilizador</th>
-                                <th>Email</th>
-                                <th>Nível de Acesso</th>
+                                <th>Nome</th>
+                                <th>Criada em</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($usuarios)): ?>
-                                <?php foreach ($usuarios as $usuario): ?>
+                            <?php if (!empty($disciplinas)): ?>
+                                <?php foreach ($disciplinas as $disciplina): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($usuario->id_usuario) ?></td>
-                                        <td><?= htmlspecialchars($usuario->nome_completo ?? '') ?></td>
-                                        <td><?= htmlspecialchars($usuario->nome_usuario ?? '') ?></td>
-                                        <td><?= htmlspecialchars($usuario->email ?? '') ?></td>
-                                        <td><?= htmlspecialchars($usuario->id_nivel_acesso ?? '') ?></td>
+                                        <td><?= htmlspecialchars($disciplina['id_disciplina']) ?></td>
+                                        <td><?= htmlspecialchars($disciplina['nome_disciplina']) ?></td>
+                                        <td><?= htmlspecialchars($disciplina['criada_em'] ?? '') ?></td>
                                         <td>
-                                            <a href="?rota=crud_usuario&acao=editar&id=<?= $usuario->id_usuario ?>" class="button is-warning is-small">
+                                            <a href="?rota=disciplinas_editar&id=<?= $disciplina['id_disciplina'] ?>" class="button is-warning is-small">
                                                 <span class="icon"><i class="fas fa-edit"></i></span>
                                                 <span>Editar</span>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="?rota=crud_usuario&acao=eliminar&id=<?= $usuario->id_usuario ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar este utilizador?')">
+                                            <a href="?rota=disciplinas_excluir&id=<?= $disciplina['id_disciplina'] ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar esta disciplina?')">
                                                 <span class="icon"><i class="fas fa-trash"></i></span>
                                                 <span>Eliminar</span>
                                             </a>
@@ -119,7 +115,7 @@ body, html {
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" class="has-text-centered">Nenhum usuário encontrado.</td>
+                                    <td colspan="5" class="has-text-centered">Nenhuma disciplina encontrada.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

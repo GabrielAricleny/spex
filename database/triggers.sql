@@ -76,7 +76,7 @@ CREATE TRIGGER trg_usuario_no_duplicate_insert
 BEFORE INSERT ON usuario
 FOR EACH ROW
 BEGIN
-    IF EXISTS (SELECT 1 FROM usuario WHERE nome_utilizador = NEW.nome_utilizador) THEN
+    IF EXISTS (SELECT 1 FROM usuario WHERE nome_usuario = NEW.nome_usuario) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: Nome de utilizador já existe.';
     END IF;
 
@@ -90,7 +90,7 @@ CREATE TRIGGER trg_usuario_no_duplicate_update
 BEFORE UPDATE ON usuario
 FOR EACH ROW
 BEGIN
-    IF NEW.nome_utilizador <> OLD.nome_utilizador AND EXISTS (SELECT 1 FROM usuario WHERE nome_utilizador = NEW.nome_utilizador) THEN
+    IF NEW.nome_usuario <> OLD.nome_usuario AND EXISTS (SELECT 1 FROM usuario WHERE nome_usuario = NEW.nome_usuario) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: Nome de utilizador já existe.';
     END IF;
 

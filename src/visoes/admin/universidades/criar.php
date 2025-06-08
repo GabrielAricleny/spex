@@ -3,6 +3,7 @@
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
 <style>
+/* ... mesmo CSS responsivo das outras views ... */
 @media (min-width: 1024px) {
     .painel-admin-container { margin-left: 260px; max-width: 1400px; padding-right: 32px; padding-left: 32px; margin-right: auto; margin-top: 0; }
     .tabela-bg { padding: 32px 48px; }
@@ -26,20 +27,18 @@
     <div class="painel-admin-container">
         <div class="painel-centralizado">
             <div class="tabela-bg">
-                <h2 class="title has-text-centered has-text-link-light">Editar Universidade</h2>
+                <h2 class="title has-text-centered has-text-link-light">Nova Universidade</h2>
                 <form method="post" style="max-width: 400px; margin: 0 auto;">
                     <div class="field">
                         <label class="label has-text-light">Nome da Universidade</label>
                         <div class="control">
-                            <input class="input" type="text" name="nome_universidade"
-                                   value="<?= htmlspecialchars($universidade['nome_universidade']) ?>" required autofocus>
+                            <input class="input" type="text" name="nome_universidade" required autofocus>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label has-text-light">Nome Abreviado</label>
                         <div class="control">
-                            <input class="input" type="text" name="nome_abreviado"
-                                   value="<?= htmlspecialchars($universidade['nome_abreviado']) ?>" maxlength="30" required>
+                            <input class="input" type="text" name="nome_abreviado" maxlength="30" required>
                         </div>
                     </div>
                     <div class="field is-grouped is-grouped-right mt-5">

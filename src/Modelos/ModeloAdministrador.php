@@ -39,7 +39,7 @@ class ModeloAdministrador
     {	
         self::inicializarConexao();
 
-        $sql = 'SELECT id_usuario, nome_completo, email, senha FROM usuario WHERE email = :email LIMIT 1';
+        $sql = 'SELECT id_usuario, nome_completo, email, senha FROM usuario WHERE email = :email AND id_nivel_acesso = 1 LIMIT 1';
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -47,12 +47,10 @@ class ModeloAdministrador
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$admin) {
-            echo "Email não encontrado.<br>";
             return null;
         }
 
         if (!password_verify($senha, $admin['senha'])) {
-            echo "Senha incorreta.<br>";
             return null;
         }
 

@@ -23,7 +23,7 @@ class Curso
     public static function todos()
     {
         $pdo = self::getConexao();
-        $sql = "SELECT id_curso, nome_curso, nivel_curso FROM curso";
+        $sql = "SELECT id_curso, nome_curso, nivel_curso, criado_em, actualizado_em FROM curso";
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

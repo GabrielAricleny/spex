@@ -13,6 +13,12 @@ class Usuario
     public $criado_em;
     public $actualizado_em;
 
+    // Adicione estas propriedades:
+    public $data_nasc = '';
+    public $telefone = '';
+    public $area_formacao = '';
+    public $curso_pretendido = '';
+
     // Busca um usuário pelo ID
     public static function buscarPorId($id)
     {

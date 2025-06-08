@@ -1,15 +1,31 @@
-<?php $paginaAtual = 'universidade'; ?>
+<?php $paginaAtual = 'disciplina'; ?>
 <?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
 <?php include __DIR__ . '/../sidebar.php'; ?>
 
 <style>
 @media (min-width: 1024px) {
-    .painel-admin-container { margin-left: 260px; max-width: 1400px; padding-right: 32px; padding-left: 32px; margin-right: auto; margin-top: 0; }
-    .tabela-bg { padding: 32px 48px; }
+    .painel-admin-container {
+        margin-left: 260px;
+        max-width: 1400px;
+        padding-right: 32px;
+        padding-left: 32px;
+        margin-right: auto;
+        margin-top: 0;
+    }
+    .tabela-bg {
+        padding: 32px 48px;
+    }
 }
 @media (max-width: 1023px) {
-    .painel-admin-container { margin-left: 0 !important; padding-left: 8px; padding-right: 8px; max-width: 100vw; }
-    .tabela-bg { padding: 16px 4px; }
+    .painel-admin-container {
+        margin-left: 0 !important;
+        padding-left: 8px;
+        padding-right: 8px;
+        max-width: 100vw;
+    }
+    .tabela-bg {
+        padding: 16px 4px;
+    }
 }
 .tabela-bg {
     background: #23272b;
@@ -26,20 +42,12 @@
     <div class="painel-admin-container">
         <div class="painel-centralizado">
             <div class="tabela-bg">
-                <h2 class="title has-text-centered has-text-link-light">Editar Universidade</h2>
+                <h2 class="title has-text-centered has-text-link-light">Nova Disciplina</h2>
                 <form method="post" style="max-width: 400px; margin: 0 auto;">
                     <div class="field">
-                        <label class="label has-text-light">Nome da Universidade</label>
+                        <label class="label has-text-light">Nome da Disciplina</label>
                         <div class="control">
-                            <input class="input" type="text" name="nome_universidade"
-                                   value="<?= htmlspecialchars($universidade['nome_universidade']) ?>" required autofocus>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label has-text-light">Nome Abreviado</label>
-                        <div class="control">
-                            <input class="input" type="text" name="nome_abreviado"
-                                   value="<?= htmlspecialchars($universidade['nome_abreviado']) ?>" maxlength="30" required>
+                            <input class="input" type="text" name="nome_disciplina" required autofocus>
                         </div>
                     </div>
                     <div class="field is-grouped is-grouped-right mt-5">
@@ -50,7 +58,7 @@
                             </button>
                         </div>
                         <div class="control">
-                            <a href="?rota=universidades_listar" class="button is-light">Cancelar</a>
+                            <a href="?rota=disciplinas_listar" class="button is-light">Cancelar</a>
                         </div>
                     </div>
                 </form>
