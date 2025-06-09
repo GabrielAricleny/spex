@@ -1,9 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$utilizadorLogado = $_SESSION['utilizador'] ?? $_SESSION['estudante'] ?? null;
+$utilizadorLogado = $_SESSION['utilizador'] ?? null;
 $nomeUtilizador   = $utilizadorLogado['nome'] ?? $utilizadorLogado['nome_completo'] ?? null;
 $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
 ?>
@@ -76,7 +72,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
                                     <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                                     <span>Dashboard</span>
                                 </a>
-                                <a href="?rota=perfil_estudante" class="navbar-item">
+                                <a href="?rota=meu_perfil" class="navbar-item">
                                     <span class="icon"><i class="fas fa-user"></i></span>
                                     <span>Meu Perfil</span>
                                 </a>
@@ -99,7 +95,7 @@ $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? 'estudante';
                         </a>
                         <a href="?rota=login_admin" class="navbar-item">
                             <span class="icon"><i class="fas fa-user-shield"></i></span>
-                            <span>Área Administrativa</span>
+                            <span></span>
                         </a>
                     </div>
                 <?php endif; ?>

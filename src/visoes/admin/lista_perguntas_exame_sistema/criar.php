@@ -42,7 +42,7 @@ input, select {
 }
 .painel-admin-container {
     margin-left: 260px;
-    max-width: 1400px;
+    max-width: 700px;
     padding-right: 32px;
     padding-left: 32px;
     margin-right: auto;
@@ -63,30 +63,38 @@ input, select {
         <div class="tabela-bg">
             <h2 class="title is-4 has-text-centered has-text-link-light" style="margin-bottom: 2rem;">
                 <span class="icon-text">
-                    <span class="icon"><i class="fas fa-edit"></i></span>
-                    <span>Editar Pergunta do Exame do Sistema</span>
+                    <span class="icon"><i class="fas fa-plus"></i></span>
+                    <span>Adicionar Pergunta ao Exame do Sistema</span>
                 </span>
             </h2>
             <form method="post" style="max-width: 400px; margin: 0 auto;">
                 <div class="field">
-                    <label class="label has-text-light">Exame</label>
-                    <input type="text" class="input" value="<?= htmlspecialchars($id_exame_sistema) ?>" disabled>
+                    <label class="label has-text-light">Exame do Sistema</label>
+                    <div class="control">
+                        <select name="id_exame_sistema" class="input" required>
+                            <option value="">Selecione...</option>
+                            <?php foreach ($exames as $exame): ?>
+                                <option value="<?= $exame['id_exame'] ?>">Exame #<?= $exame['id_exame'] ?> (<?= htmlspecialchars($exame['duracao']) ?>)</option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="field">
                     <label class="label has-text-light">Pergunta</label>
-                    <select name="id_pergunta" class="input" required>
-                        <?php foreach ($perguntas as $pergunta): ?>
-                            <option value="<?= $pergunta['id_pergunta'] ?>" <?= $pergunta['id_pergunta'] == $id_pergunta ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($pergunta['enunciado'] ?? $pergunta['texto_pergunta']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="control">
+                        <select name="id_pergunta" class="input" required>
+                            <option value="">Selecione...</option>
+                            <?php foreach ($perguntas as $pergunta): ?>
+                                <option value="<?= $pergunta['id_pergunta'] ?>"><?= htmlspecialchars($pergunta['enunciado'] ?? $pergunta['texto_pergunta']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="field is-grouped is-grouped-right mt-5" style="display:flex; gap:8px; justify-content:flex-end;">
                     <div class="control">
                         <button type="submit" class="button is-success">
                             <span class="icon"><i class="fas fa-check"></i></span>
-                            <span>Salvar</span>
+                            <span>Adicionar</span>
                         </button>
                     </div>
                     <div class="control">

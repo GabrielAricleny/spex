@@ -125,4 +125,24 @@ class ModeloEstudante
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
+
+    public function atualizarPerfil(int $id_usuario, array $dados): bool
+    {
+        $sqlUsuario = "UPDATE usuario SET nome_completo = :nome_completo, email = :email WHERE id_usuario = :id_usuario";
+        $stmtUsuario = $this->pdo->prepare($sqlUsuario);
+        $stmtUsuario->bindValue(':nome_completo', $dados['nome_completo'], PDO::PARAM_STR);
+        $stmtUsuario->bindValue(':email', $dados['email'], PDO::PARAM_STR);
+        $stmtUsuario->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmtUsuario->execute();
+
+        $sqlEstudante = "UPDATE estudante SET data_nasc = :data_nasc, telefone = :telefone, area_formacao = :area_formacao, curso_pretendido = :curso_pretendido WHERE id_usuario = :id_usuario";
+        $stmtEstudante = $this->pdo->prepare($sqlEstudante);
+        $stmtEstudante->bindValue(':data_nasc', $dados['data_nasc'], PDO::PARAM_STR);
+        $stmtEstudante->bindValue(':telefone', $dados['telefone'], PDO::PARAM_STR);
+        $stmtEstudante->bindValue(':area_formacao', $dados['area_formacao'], PDO::PARAM_INT);
+        $stmtEstudante->bindValue(':curso_pretendido', $dados['curso_pretendido'], PDO::PARAM_INT);
+        $stmtEstudante->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+
+        return $stmtEstudante->execute();
+    }
 }

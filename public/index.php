@@ -5,9 +5,11 @@ declare(strict_types=1);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
 ini_set('log_errors', 1);
 ini_set('error_log', '/tmp/php_errors.log');
+
+// Configurações de sessão
+ini_set('session.cookie_path', '/');
 
 // Inicia sessão se ainda não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
@@ -89,6 +91,9 @@ $roteador->adicionar(['GET'], 'dashboard_estudante', fn() => (new ControladorEst
 $roteador->adicionar(['GET', 'POST'], 'cadastro_estudante', fn() => (new ControladorEstudanteUser())->cadastro());
 $roteador->adicionar(['GET', 'POST'], 'registro', fn() => (new ControladorEstudanteUser())->cadastro());
 
+// === PERFIL DO ESTUDANTE ===
+$roteador->adicionar(['GET', 'POST'], 'meu_perfil', fn() => (new \App\controladores\utilizador\ControladorPerfilEstudante())->editar(), ['autenticadoEstudante']);
+
 // ==================== TEMA ====================
 $roteador->adicionar(['GET'], 'tema_listar', fn() => (new ControladorTema())->listar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'tema_criar', fn() => (new ControladorTema())->criar(), ['autenticadoAdmin']);
@@ -107,7 +112,36 @@ $roteador->adicionar(['GET', 'POST'], 'disciplina_curso_criar', fn() => (new Con
 $roteador->adicionar(['GET', 'POST'], 'disciplina_curso_editar', fn() => (new ControladorDisciplinaCurso())->editar(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'disciplina_curso_excluir', fn() => (new ControladorDisciplinaCurso())->excluir(), ['autenticadoAdmin']);
 
+// ==================== EXAME SISTEMA ====================
+$roteador->adicionar(['GET'], 'exame_sistema_listar', fn() => (new ControladorExameSistema())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'exame_sistema_editar', fn() => (new ControladorExameSistema())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'exame_sistema_excluir', fn() => (new ControladorExameSistema())->excluir(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'exame_sistema_criar', fn() => (new ControladorExameSistema())->criar(), ['autenticadoAdmin']);
+
+// ==================== EXAME UNIVERSIDADE ====================
+//$roteador->adicionar(['GET'], 'exame_universidade_listar', fn() => (new ControladorExameUniversidade())->listar(), ['autenticadoAdmin']);
+//$roteador->adicionar(['GET', 'POST'], 'exame_universidade_editar', fn() => (new ControladorExameUniversidade())->editar(), ['autenticadoAdmin']);
+//$roteador->adicionar(['GET', 'POST'], 'exame_universidade_excluir', fn() => (new ControladorExameUniversidade())->excluir(), ['autenticadoAdmin']);
+//$roteador->adicionar(['GET', 'POST'], 'exame_universidade_criar', fn() => (new ControladorExameUniversidade())->criar(), ['autenticadoAdmin']);
+
+// ==================== LISTA PERGUNTAS EXAME SISTEMA ====================
+$roteador->adicionar(['GET'], 'lista_perguntas_exame_sistema_listar', fn() => (new ControladorListaPerguntasExameSistema())->listar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'lista_perguntas_exame_sistema_criar', fn() => (new ControladorListaPerguntasExameSistema())->criar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'lista_perguntas_exame_sistema_editar', fn() => (new ControladorListaPerguntasExameSistema())->editar(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET'], 'lista_perguntas_exame_sistema_excluir', fn() => (new ControladorListaPerguntasExameSistema())->excluir(), ['autenticadoAdmin']);
+$roteador->adicionar(['GET', 'POST'], 'lista_perguntas_exame_sistema_criar_aleatorio', fn() => (new ControladorListaPerguntasExameSistema())->criar_aleatorio(), ['autenticadoAdmin']);
+
+// ==================== LISTA PERGUNTAS EXAME UNIVERSIDADE ====================
+//$roteador->adicionar(['GET'], 'lista_perguntas_exame_universidade_listar', fn() => (new ControladorListaPerguntasExameUniversidade())->listar(), ['autenticadoAdmin']);
+// ...adicione as rotas de criar, editar, excluir se necessário...
+
 // ==================== ROTEAMENTO ====================
 $rota = $_GET['rota'] ?? 'inicio';
 $roteador->despachar($rota);
 ?>
+<div style="width:100%; display:flex; justify-content:flex-end; margin-bottom:24px;">
+    <a href="?rota=exame_sistema_criar" class="button is-primary is-small">
+        <span class="icon"><i class="fas fa-plus"></i></span>
+        <span>Novo Exame</span>
+    </a>
+</div><?php

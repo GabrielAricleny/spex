@@ -82,7 +82,7 @@ body, html {
     min-height: 100vh;
 }
 </style>
-<div class="sidebar-fixo">
+<div class="sidebar-fixo" id="sidebar">
     <nav class="panel is-dark is-fullwidth mb-4">
         <p class="panel-heading is-hidden-mobile">
             Tabelas do Sistema
@@ -95,21 +95,21 @@ body, html {
             'administrador' => 'crud_administrador',
             'estudante' => 'crud_estudante',
             'curso' => 'crud_curso',
-            'exame_sistema' => 'crud_exame_sistema',
-            'exame_universidade' => 'crud_exame_universidade',
+            'exame_sistema' => 'exame_sistema_listar',
+            'exame_universidade' => 'exame_universidade_listar',
             'universidade' => 'universidades_listar',
-            'disciplina' => 'disciplinas_listar',
-            'disciplina_curso' => 'disciplina_curso_listar', // <-- Atualizado para RESTful
+            'disciplina' => 'disciplina_listar',
+            'disciplina_curso' => 'disciplina_curso_listar',
             'tema' => 'tema_listar',
             'status_pergunta' => 'status_pergunta_listar',
             'pergunta' => 'pergunta_listar',
-            'lista_perguntas_exame_universidade' => 'crud_lista_perguntas_exame_universidade',
-            'lista_perguntas_exame_sistema' => 'crud_lista_perguntas_exame_sistema',
-            'historico_aluno' => 'crud_historico_aluno',
-            'exame_sistema_realizado' => 'crud_exame_sistema_realizado',
-            'exame_universidade_realizado' => 'crud_exame_universidade_realizado',
-            'resultado_exame' => 'crud_resultado_exame',
-            'pergunta_acertada_exame_sistema' => 'crud_pergunta_acertada_exame_sistema',
+            'lista_perguntas_exame_universidade' => 'lista_perguntas_exame_universidade_listar',
+            'lista_perguntas_exame_sistema' => 'lista_perguntas_exame_sistema_listar',
+            'historico_aluno' => 'historico_aluno_listar',
+            'exame_sistema_realizado' => 'exame_sistema_realizado_listar',
+            'exame_universidade_realizado' => 'exame_universidade_realizado_listar',
+            'resultado_exame' => 'resultado_exame_listar',
+            'pergunta_acertada_exame_sistema' => 'pergunta_acertada_exame_sistema_listar',
         ];
         foreach ($resumos as $tabela => $dados): 
             $rota = $rotas[$tabela] ?? 'crud_' . $tabela;

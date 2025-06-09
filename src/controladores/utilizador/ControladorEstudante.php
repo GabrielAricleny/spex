@@ -49,7 +49,7 @@ class ControladorEstudante
 
     public function dashboard()
     {
-        if (!isset($_SESSION['utilizador'])) {
+        if (empty($_SESSION['utilizador'])) {
             header('Location: ?rota=inicio');
             exit;
         }
@@ -59,7 +59,7 @@ class ControladorEstudante
 
     public function perfil()
     {
-        if (!isset($_SESSION['utilizador'])) {
+        if (empty($_SESSION['utilizador'])) {
             header('Location: ?rota=login_estudante');
             exit;
         }
@@ -69,7 +69,7 @@ class ControladorEstudante
 
     public function meusResultados()
     {
-        if (!isset($_SESSION['utilizador'])) {
+        if (empty($_SESSION['utilizador'])) {
             header('Location: ?rota=login_estudante');
             exit;
         }

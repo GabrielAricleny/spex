@@ -1,1 +1,1 @@
-DESCRIBE pergunta;
+SELECT * FROM exame_sistema

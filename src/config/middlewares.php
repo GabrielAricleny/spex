@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\config;
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+//if (session_status() === PHP_SESSION_NONE) {
+//    session_start();
+//}
 
 /**
  * Middleware: Verifica se o administrador está autenticado.
@@ -30,7 +30,7 @@ function autenticadoEstudante(): void
         !isset($_SESSION['utilizador']) ||
         ($_SESSION['utilizador']['nivel_acesso'] ?? '') !== 'estudante'
     ) {
-        header('Location: ?rota=inicio');
+        header('Location: ?rota=login_estudante');
         exit;
     }
 }

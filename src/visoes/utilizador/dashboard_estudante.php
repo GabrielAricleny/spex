@@ -1,8 +1,17 @@
 <?php
+//if (session_status() === PHP_SESSION_NONE) {
+//    session_start();
+//}
+
 $paginaCss = 'dashboard';
 require_once __DIR__ . '/../templates/cabecalho.php';
 
+// Supondo que o controlador já passou estes dados:
 $estudante = $_SESSION['utilizador'] ?? null;
+$totalExames = $totalExames ?? 0;
+$ultimaNota = $ultimaNota ?? '-';
+$progresso = $progresso ?? 0;
+$historico = $historico ?? [];
 ?>
 
 <section class="section">
@@ -13,10 +22,12 @@ $estudante = $_SESSION['utilizador'] ?? null;
                 <aside class="menu">
                     <p class="menu-label">Menu</p>
                     <ul class="menu-list">
-                        <li><a href="?rota=dashboard_estudante" class="is-active">Dashboard</a></li>
-                        <li><a href="?rota=arena_exames">Arena de Exames</a></li>
-                        <li><a href="?rota=meu_perfil">Meu Perfil</a></li>
-                        <li><a href="?rota=meus_resultados">Meus Resultados</a></li>
+                        <li><a href="?rota=dashboard_estudante"<?= (isset($_GET['rota']) && $_GET['rota'] === 'dashboard_estudante') ? ' class="is-active"' : '' ?>>Dashboard</a></li>
+                        <li><a href="?rota=arena_exames"<?= (isset($_GET['rota']) && $_GET['rota'] === 'arena_exames') ? ' class="is-active"' : '' ?>>Arena de Exames</a></li>
+                        <li><a href="?rota=meu_perfil"<?= (isset($_GET['rota']) && $_GET['rota'] === 'meu_perfil') ? ' class="is-active"' : '' ?>>Meu Perfil</a></li>
+                        <li><a href="?rota=meus_resultados"<?= (isset($_GET['rota']) && $_GET['rota'] === 'meus_resultados') ? ' class="is-active"' : '' ?>>Meus Resultados</a></li>
+                        <li><a href="?rota=inicio">Início</a></li>
+                        <li><a href="?rota=sair_estudante">Sair</a></li>
                     </ul>
                 </aside>
             </div>
@@ -32,19 +43,19 @@ $estudante = $_SESSION['utilizador'] ?? null;
                     <div class="tile is-parent">
                         <article class="tile is-child box bloco-exames">
                             <p class="title">Exames Disponíveis</p>
-                            <p class="subtitle">5</p>
+                            <p class="subtitle"><?= $totalExames ?></p>
                         </article>
                     </div>
                     <div class="tile is-parent">
                         <article class="tile is-child box bloco-nota">
                             <p class="title">Última Nota</p>
-                            <p class="subtitle">16.5</p>
+                            <p class="subtitle"><?= $ultimaNota !== null ? $ultimaNota : '-' ?></p>
                         </article>
                     </div>
                     <div class="tile is-parent">
                         <article class="tile is-child box bloco-progresso">
                             <p class="title">Progresso</p>
-                            <p class="subtitle">75%</p>
+                            <p class="subtitle"><?= $progresso ?>%</p>
                         </article>
                     </div>
                 </div>
@@ -66,12 +77,22 @@ $estudante = $_SESSION['utilizador'] ?? null;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Matemática 2023</td>
-                                        <td>10/05/2023</td>
-                                        <td>18</td>
-                                        <td><a href="#" class="button is-small is-info">Ver Detalhes</a></td>
-                                    </tr>
+                                    <?php if (!empty($historico)): ?>
+                                        <?php foreach ($historico as $exame): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($exame['nome_exame'] ?? 'Exame') ?></td>
+                                                <td><?= date('d/m/Y', strtotime($exame['data_realizacao'])) ?></td>
+                                                <td><?= $exame['nota_obtida'] ?></td>
+                                                <td>
+                                                    <a href="?rota=detalhes_exame&id=<?= $exame['id_exame_realizado'] ?>" class="button is-small is-info">Ver Detalhes</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="4" class="has-text-centered">Nenhum exame realizado ainda.</td>
+                                        </tr>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>

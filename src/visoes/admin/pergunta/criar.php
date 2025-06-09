@@ -2,9 +2,9 @@
 $paginaAtual = 'pergunta';
 // Proteção: só admins podem acessar
 include __DIR__ . '/../protecao_admin.php';
+include __DIR__ . '/../../templates/cabecalho.php';
+include __DIR__ . '/../sidebar.php'; 
 ?>
-<?php include __DIR__ . '/../../templates/cabecalho.php'; ?>
-<?php include __DIR__ . '/../sidebar.php'; ?>
 
 <style>
 .painel-admin-container {
@@ -48,7 +48,12 @@ include __DIR__ . '/../protecao_admin.php';
                                         <select name="curso" required>
                                             <option value="">Selecione...</option>
                                             <?php foreach ($cursos as $curso): ?>
-                                                <option value="<?= $curso['id_curso'] ?>"><?= htmlspecialchars($curso['nome_curso']) ?></option>
+                                                <?php if (
+                                                    isset($curso['nivel_curso']) && strtolower($curso['nivel_curso']) === 'superior'
+                                                    || isset($curso['nivel_curso']) && strtolower($curso['nivel_curso']) === 'superior'
+                                                ): ?>
+                                                    <option value="<?= $curso['id_curso'] ?>"><?= htmlspecialchars($curso['nome_curso']) ?></option>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
