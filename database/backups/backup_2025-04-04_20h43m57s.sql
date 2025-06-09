@@ -1,0 +1,733 @@
+-- MySQL dump 10.13  Distrib 8.0.39, for Win64 (x86_64)
+--
+-- Host: localhost    Database: db_spex
+-- ------------------------------------------------------
+-- Server version	8.0.39
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `administrador`
+--
+
+DROP TABLE IF EXISTS `administrador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `administrador` (
+  `id_administrador` int NOT NULL AUTO_INCREMENT,
+  `nome_administrador` varchar(45) NOT NULL,
+  `telefone` char(15) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `senha_administrador` varchar(16) NOT NULL,
+  `categoria` int NOT NULL,
+  PRIMARY KEY (`id_administrador`),
+  UNIQUE KEY `id_UNIQUE` (`id_administrador`),
+  UNIQUE KEY `telefone_UNIQUE` (`telefone`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `categoria_idx` (`categoria`),
+  CONSTRAINT `categoria` FOREIGN KEY (`categoria`) REFERENCES `categoria_usuario` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administrador`
+--
+
+LOCK TABLES `administrador` WRITE;
+/*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria_usuario`
+--
+
+DROP TABLE IF EXISTS `categoria_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria_usuario` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `nome_categoria` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_categoria`),
+  UNIQUE KEY `id_categoria_UNIQUE` (`id_categoria`),
+  UNIQUE KEY `nome_categoria_UNIQUE` (`nome_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria_usuario`
+--
+
+LOCK TABLES `categoria_usuario` WRITE;
+/*!40000 ALTER TABLE `categoria_usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `componente_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `componente_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `componente_exame_sistema` (
+  `id_exame_sistema` int NOT NULL,
+  `id_disciplina` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_exame_sistema`,`id_disciplina`),
+  KEY `id_disciplina_idx` (`id_disciplina`),
+  CONSTRAINT `id_disciplina1` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`nome_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_exame_sistema2` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `componente_exame_sistema`
+--
+
+LOCK TABLES `componente_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `componente_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `componente_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `componente_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `componente_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `componente_exame_universidade` (
+  `id_exame_universidade` int NOT NULL,
+  `id_disciplina` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_exame_universidade`,`id_disciplina`),
+  KEY `id_disciplina_idx` (`id_disciplina`),
+  CONSTRAINT `id_disciplina3` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`nome_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_exame_universidade1` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_universidade` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `componente_exame_universidade`
+--
+
+LOCK TABLES `componente_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `componente_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `componente_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `curso`
+--
+
+DROP TABLE IF EXISTS `curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `curso` (
+  `id_curso` int NOT NULL AUTO_INCREMENT,
+  `nome_curso` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_curso`),
+  UNIQUE KEY `id_UNIQUE` (`id_curso`),
+  UNIQUE KEY `id_pergunta_UNIQUE` (`nome_curso`)
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `curso`
+--
+
+LOCK TABLES `curso` WRITE;
+/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` VALUES (9,'Gestão de Sistemas Informáticos'),(5,'MED Análises Clínicas'),(2,'MED Ciências Económicas e Jurídicas'),(1,'MED Ciências Físicas e Biológicas'),(3,'MED Ciências Humanas'),(14,'MED Contabilidade'),(11,'MED Desenho Técnico'),(10,'MED Electricidade'),(4,'MED Enfermagem'),(21,'MED Ensino de Biologia e Química'),(23,'MED Ensino de Educação Física'),(20,'MED Ensino de Inglês e EMC'),(18,'MED Ensino de Língua Portuguesa'),(19,'MED Ensino de Matemática e Física'),(7,'MED Farmácia'),(17,'MED Finanças'),(6,'MED Fisioterapia'),(15,'MED Gestão de Recursos Humanos'),(16,'MED Gestão Empresarial'),(8,'MED Informática'),(13,'MED Informática de Gestão'),(22,'MED Instrução Primária'),(12,'MED Mecânica'),(52,'MESCTI Análises Clínicas e Saúde Pública'),(38,'MESCTI Ciência da Computação'),(47,'MESCTI Contabilidade e Auditoria'),(45,'MESCTI Contabilidade e Gestão'),(42,'MESCTI Economia'),(30,'MESCTI Educação de Infância'),(51,'MESCTI Enfermagem'),(36,'MESCTI Engenharia de Construção Civil'),(32,'MESCTI Engenharia de Telecomunicações'),(35,'MESCTI Engenharia Eléctrica'),(33,'MESCTI Engenharia Electrónica'),(34,'MESCTI Engenharia Electrotécnica'),(31,'MESCTI Engenharia Informática'),(37,'MESCTI Engenharia Mecânica'),(26,'MESCTI Ensino da Informática'),(28,'MESCTI Ensino da Língua Inglesa'),(24,'MESCTI Ensino da Língua Portuguesa'),(25,'MESCTI Ensino da Matemática'),(27,'MESCTI Ensino de História'),(29,'MESCTI Ensino Primário'),(55,'MESCTI Farmacologia'),(39,'MESCTI Física'),(53,'MESCTI Fisioterapia'),(48,'MESCTI Gestão de Finanças'),(46,'MESCTI Gestão de Recursos Humanos'),(43,'MESCTI Gestão e Administração Pública'),(44,'MESCTI Gestão Empresarial'),(41,'MESCTI Matemática'),(49,'MESCTI Medicina'),(56,'MESCTI Medicina Dentária'),(50,'MESCTI Medicina Geral'),(54,'MESCTI Nutrição'),(57,'MESCTI Oftamologia'),(40,'MESCTI Química');
+/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `curso_alvo_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `curso_alvo_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `curso_alvo_exame_sistema` (
+  `id_curso` int NOT NULL,
+  `id_exame_sistema` int NOT NULL,
+  PRIMARY KEY (`id_curso`,`id_exame_sistema`),
+  KEY `id_exame_idx` (`id_exame_sistema`),
+  CONSTRAINT `id_curso1` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_exame_sistema1` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `curso_alvo_exame_sistema`
+--
+
+LOCK TABLES `curso_alvo_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `curso_alvo_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `curso_alvo_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `curso_alvo_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `curso_alvo_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `curso_alvo_exame_universidade` (
+  `id_curso` int NOT NULL,
+  `id_exame_universidade` int NOT NULL,
+  PRIMARY KEY (`id_curso`,`id_exame_universidade`),
+  KEY `id_exame_universidade_idx` (`id_exame_universidade`),
+  CONSTRAINT `id_curso3` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_exame_universidade2` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_universidade` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `curso_alvo_exame_universidade`
+--
+
+LOCK TABLES `curso_alvo_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `curso_alvo_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `curso_alvo_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `disciplina`
+--
+
+DROP TABLE IF EXISTS `disciplina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `disciplina` (
+  `id_disciplina` int NOT NULL AUTO_INCREMENT,
+  `nome_disciplina` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_disciplina`),
+  UNIQUE KEY `id_UNIQUE` (`id_disciplina`),
+  UNIQUE KEY `nome_disciplina_UNIQUE` (`nome_disciplina`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `disciplina`
+--
+
+LOCK TABLES `disciplina` WRITE;
+/*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
+/*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `disciplina_curso`
+--
+
+DROP TABLE IF EXISTS `disciplina_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `disciplina_curso` (
+  `id_disciplina` int NOT NULL,
+  `id_curso` int NOT NULL,
+  PRIMARY KEY (`id_disciplina`,`id_curso`),
+  KEY `id_curso_idx` (`id_curso`),
+  CONSTRAINT `id_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_disciplina` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `disciplina_curso`
+--
+
+LOCK TABLES `disciplina_curso` WRITE;
+/*!40000 ALTER TABLE `disciplina_curso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `disciplina_curso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estudante`
+--
+
+DROP TABLE IF EXISTS `estudante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `estudante` (
+  `id_estudante` int NOT NULL AUTO_INCREMENT,
+  `nome_estudante` varchar(45) NOT NULL,
+  `data_nasc` date NOT NULL,
+  `telefone` char(15) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `area_formacao` int NOT NULL,
+  `curso_pretendido` int NOT NULL,
+  `historico` int DEFAULT NULL,
+  `nome_usuario` varchar(45) NOT NULL,
+  `senha_estudante` varchar(16) NOT NULL,
+  PRIMARY KEY (`id_estudante`),
+  UNIQUE KEY `nome_usuario` (`nome_usuario`),
+  UNIQUE KEY `id_UNIQUE` (`id_estudante`),
+  UNIQUE KEY `telefone_UNIQUE` (`telefone`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `area_formacao_idx` (`area_formacao`),
+  KEY `curso_pretendido_idx` (`curso_pretendido`),
+  KEY `historico_idx` (`historico`),
+  CONSTRAINT `area_formacao` FOREIGN KEY (`area_formacao`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `curso_pretendido` FOREIGN KEY (`curso_pretendido`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `historico` FOREIGN KEY (`historico`) REFERENCES `historico_aluno_exame_sistema` (`id_historico_aluno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estudante`
+--
+
+LOCK TABLES `estudante` WRITE;
+/*!40000 ALTER TABLE `estudante` DISABLE KEYS */;
+INSERT INTO `estudante` VALUES (1,'Mr. Somebody','1990-01-01','912345678','mr.somebody@example.com',1,25,NULL,'somebody','somebody'),(2,'Somebody Else','2000-12-31','923456781','somebody.else@example.com',1,26,NULL,'somebody_else','somebody_else');
+/*!40000 ALTER TABLE `estudante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `exame_sistema`
+--
+
+DROP TABLE IF EXISTS `exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `exame_sistema` (
+  `id_exame` int NOT NULL AUTO_INCREMENT,
+  `duracao` time NOT NULL,
+  PRIMARY KEY (`id_exame`),
+  UNIQUE KEY `id_UNIQUE` (`id_exame`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `exame_sistema`
+--
+
+LOCK TABLES `exame_sistema` WRITE;
+/*!40000 ALTER TABLE `exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `exame_sistema_realizado`
+--
+
+DROP TABLE IF EXISTS `exame_sistema_realizado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `exame_sistema_realizado` (
+  `id_exame_realizado` int NOT NULL AUTO_INCREMENT,
+  `id_exame_sistema` int NOT NULL,
+  `data_realizacao` datetime NOT NULL,
+  `nota_obtida` float NOT NULL,
+  `tempo_decorrido` time NOT NULL,
+  PRIMARY KEY (`id_exame_realizado`),
+  UNIQUE KEY `id_UNIQUE` (`id_exame_realizado`),
+  KEY `id_exame_idx` (`id_exame_sistema`),
+  CONSTRAINT `id_exame_sistema` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `exame_sistema_realizado`
+--
+
+LOCK TABLES `exame_sistema_realizado` WRITE;
+/*!40000 ALTER TABLE `exame_sistema_realizado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exame_sistema_realizado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `exame_universidade`
+--
+
+DROP TABLE IF EXISTS `exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `exame_universidade` (
+  `id_exame` int NOT NULL AUTO_INCREMENT,
+  `duracao` time NOT NULL,
+  `id_universidade` int NOT NULL,
+  PRIMARY KEY (`id_exame`),
+  UNIQUE KEY `id_UNIQUE` (`id_exame`),
+  UNIQUE KEY `id_universidade_UNIQUE` (`id_universidade`),
+  CONSTRAINT `id_universidade` FOREIGN KEY (`id_universidade`) REFERENCES `universidade` (`id_universidade`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `exame_universidade`
+--
+
+LOCK TABLES `exame_universidade` WRITE;
+/*!40000 ALTER TABLE `exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `exame_universidade_realizado`
+--
+
+DROP TABLE IF EXISTS `exame_universidade_realizado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `exame_universidade_realizado` (
+  `id_exame_realizado` int NOT NULL AUTO_INCREMENT,
+  `id_exame_universidade` int NOT NULL,
+  `data_realizacao` datetime NOT NULL,
+  `nota_obtida` float NOT NULL,
+  `tempo_decorrido` time NOT NULL,
+  PRIMARY KEY (`id_exame_realizado`),
+  UNIQUE KEY `id_UNIQUE` (`id_exame_realizado`),
+  KEY `id_exame_idx` (`id_exame_universidade`),
+  CONSTRAINT `id_exame_universidade` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `exame_universidade_realizado`
+--
+
+LOCK TABLES `exame_universidade_realizado` WRITE;
+/*!40000 ALTER TABLE `exame_universidade_realizado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exame_universidade_realizado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historico_aluno_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `historico_aluno_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historico_aluno_exame_sistema` (
+  `id_historico_aluno` int NOT NULL AUTO_INCREMENT,
+  `id_exame_sistema_realizado` int NOT NULL,
+  PRIMARY KEY (`id_historico_aluno`),
+  UNIQUE KEY `id_UNIQUE` (`id_historico_aluno`),
+  KEY `id_exame_sistema_realizado_idx` (`id_exame_sistema_realizado`),
+  CONSTRAINT `id_exame_sistema_realizado` FOREIGN KEY (`id_exame_sistema_realizado`) REFERENCES `exame_sistema_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historico_aluno_exame_sistema`
+--
+
+LOCK TABLES `historico_aluno_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `historico_aluno_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historico_aluno_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historico_aluno_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `historico_aluno_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historico_aluno_exame_universidade` (
+  `id_historico_aluno` int NOT NULL AUTO_INCREMENT,
+  `id_exame_universidade_realizado` int NOT NULL,
+  PRIMARY KEY (`id_historico_aluno`),
+  UNIQUE KEY `id_UNIQUE` (`id_historico_aluno`),
+  KEY `id_exame_universidade_realizado_idx` (`id_exame_universidade_realizado`),
+  CONSTRAINT `id_exame_universidade_realizado2` FOREIGN KEY (`id_exame_universidade_realizado`) REFERENCES `exame_universidade_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historico_aluno_exame_universidade`
+--
+
+LOCK TABLES `historico_aluno_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `historico_aluno_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historico_aluno_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lista_perguntas_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `lista_perguntas_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lista_perguntas_exame_sistema` (
+  `id_exame_sistema` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_sistema`,`id_pergunta`),
+  KEY `id_pergunta_idx` (`id_pergunta`),
+  CONSTRAINT `exame_sistema` FOREIGN KEY (`id_exame_sistema`) REFERENCES `exame_sistema` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta_cadastrada` (`id_pergunta_cadastrada`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lista_perguntas_exame_sistema`
+--
+
+LOCK TABLES `lista_perguntas_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `lista_perguntas_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lista_perguntas_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lista_perguntas_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `lista_perguntas_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lista_perguntas_exame_universidade` (
+  `id_exame_universidade` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_universidade`,`id_pergunta`),
+  KEY `id_pergunta_idx` (`id_pergunta`),
+  CONSTRAINT `id_exame` FOREIGN KEY (`id_exame_universidade`) REFERENCES `exame_universidade` (`id_exame`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_pergunta` FOREIGN KEY (`id_pergunta`) REFERENCES `pergunta_cadastrada` (`id_pergunta_cadastrada`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lista_perguntas_exame_universidade`
+--
+
+LOCK TABLES `lista_perguntas_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `lista_perguntas_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lista_perguntas_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pergunta_acertada_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `pergunta_acertada_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pergunta_acertada_exame_sistema` (
+  `id_exame_sistema_realizado` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_sistema_realizado`),
+  KEY `id_pergunta_idx` (`id_pergunta`),
+  CONSTRAINT `id_exame_sistema_realizado1` FOREIGN KEY (`id_exame_sistema_realizado`) REFERENCES `exame_sistema_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_pergunta_acertada` FOREIGN KEY (`id_pergunta`) REFERENCES `lista_perguntas_exame_sistema` (`id_exame_sistema`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pergunta_acertada_exame_sistema`
+--
+
+LOCK TABLES `pergunta_acertada_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `pergunta_acertada_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pergunta_acertada_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pergunta_acertada_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `pergunta_acertada_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pergunta_acertada_exame_universidade` (
+  `id_exame_universidade_realizado` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_universidade_realizado`),
+  KEY `id_pergunta1` (`id_pergunta`),
+  CONSTRAINT `id_exame_universidade_realizado` FOREIGN KEY (`id_exame_universidade_realizado`) REFERENCES `exame_universidade_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_pergunta1` FOREIGN KEY (`id_pergunta`) REFERENCES `lista_perguntas_exame_universidade` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pergunta_acertada_exame_universidade`
+--
+
+LOCK TABLES `pergunta_acertada_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `pergunta_acertada_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pergunta_acertada_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pergunta_cadastrada`
+--
+
+DROP TABLE IF EXISTS `pergunta_cadastrada`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pergunta_cadastrada` (
+  `id_pergunta_cadastrada` int NOT NULL AUTO_INCREMENT,
+  `enunciado` varchar(50) NOT NULL,
+  `resposta` varchar(50) NOT NULL,
+  `curso` int NOT NULL,
+  `disciplina` int NOT NULL,
+  `tema` int NOT NULL,
+  `status` int NOT NULL,
+  PRIMARY KEY (`id_pergunta_cadastrada`),
+  UNIQUE KEY `id_UNIQUE` (`id_pergunta_cadastrada`),
+  UNIQUE KEY `enunciado_UNIQUE` (`enunciado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pergunta_cadastrada`
+--
+
+LOCK TABLES `pergunta_cadastrada` WRITE;
+/*!40000 ALTER TABLE `pergunta_cadastrada` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pergunta_cadastrada` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pergunta_errada_exame_sistema`
+--
+
+DROP TABLE IF EXISTS `pergunta_errada_exame_sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pergunta_errada_exame_sistema` (
+  `id_exame_sistema_realizado` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_sistema_realizado`),
+  KEY `id_pergunta_errada` (`id_pergunta`),
+  CONSTRAINT `id_exame_sistema_realizado2` FOREIGN KEY (`id_exame_sistema_realizado`) REFERENCES `exame_sistema_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_pergunta_errada` FOREIGN KEY (`id_pergunta`) REFERENCES `lista_perguntas_exame_universidade` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pergunta_errada_exame_sistema`
+--
+
+LOCK TABLES `pergunta_errada_exame_sistema` WRITE;
+/*!40000 ALTER TABLE `pergunta_errada_exame_sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pergunta_errada_exame_sistema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pergunta_errada_exame_universidade`
+--
+
+DROP TABLE IF EXISTS `pergunta_errada_exame_universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pergunta_errada_exame_universidade` (
+  `id_exame_universidade_realizado` int NOT NULL,
+  `id_pergunta` int NOT NULL,
+  PRIMARY KEY (`id_exame_universidade_realizado`),
+  KEY `id_pergunta2` (`id_pergunta`),
+  CONSTRAINT `id_exame_universidade_realizado1` FOREIGN KEY (`id_exame_universidade_realizado`) REFERENCES `exame_universidade_realizado` (`id_exame_realizado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_pergunta2` FOREIGN KEY (`id_pergunta`) REFERENCES `lista_perguntas_exame_universidade` (`id_pergunta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pergunta_errada_exame_universidade`
+--
+
+LOCK TABLES `pergunta_errada_exame_universidade` WRITE;
+/*!40000 ALTER TABLE `pergunta_errada_exame_universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pergunta_errada_exame_universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tema_disciplina`
+--
+
+DROP TABLE IF EXISTS `tema_disciplina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tema_disciplina` (
+  `id_tema` int NOT NULL,
+  `descricao` varchar(50) NOT NULL,
+  `id_disciplina` int NOT NULL,
+  PRIMARY KEY (`id_tema`),
+  UNIQUE KEY `descricao_UNIQUE` (`descricao`),
+  KEY `id_disciplina_idx` (`id_disciplina`),
+  CONSTRAINT `id_disciplina2` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tema_disciplina`
+--
+
+LOCK TABLES `tema_disciplina` WRITE;
+/*!40000 ALTER TABLE `tema_disciplina` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tema_disciplina` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `universidade`
+--
+
+DROP TABLE IF EXISTS `universidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `universidade` (
+  `id_universidade` int NOT NULL AUTO_INCREMENT,
+  `nome_universidade` varchar(45) NOT NULL,
+  `nome_abreviado` varchar(10) NOT NULL,
+  PRIMARY KEY (`id_universidade`),
+  UNIQUE KEY `id_universidade_UNIQUE` (`id_universidade`),
+  UNIQUE KEY `nome_universidade_UNIQUE` (`nome_universidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `universidade`
+--
+
+LOCK TABLES `universidade` WRITE;
+/*!40000 ALTER TABLE `universidade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `universidade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `universidade_curso`
+--
+
+DROP TABLE IF EXISTS `universidade_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `universidade_curso` (
+  `id_universidade` int NOT NULL,
+  `id_curso` int NOT NULL,
+  PRIMARY KEY (`id_universidade`,`id_curso`),
+  KEY `id_curso_idx` (`id_curso`),
+  CONSTRAINT `id_curso2` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_universidade1` FOREIGN KEY (`id_universidade`) REFERENCES `universidade` (`id_universidade`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `universidade_curso`
+--
+
+LOCK TABLES `universidade_curso` WRITE;
+/*!40000 ALTER TABLE `universidade_curso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `universidade_curso` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-04-04 20:44:00

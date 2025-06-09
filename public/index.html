@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - SPEX</title>
+    <link rel="stylesheet" href="css/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --secondary-gradient: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hero.is-link {
+            background: var(--primary-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero.is-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.03)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            background-size: cover;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #f8f8f8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .feature-box {
+            transition: var(--transition);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            height: 100%;
+            background: white;
+            box-shadow: var(--box-shadow);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--secondary-gradient);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-box:hover::after {
+            height: 100%;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-button {
+            background: white;
+            color: #3a0ca3;
+            border: none;
+            font-weight: 600;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: #f8f8f8;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 1.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-1000px) translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-link is-fullheight">
+        <div class="particles" id="particles"></div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="hero-title">Bem-vindo ao SPEX</h1>
+                <p class="hero-subtitle">Prepare-se para seus exames de forma interativa e eficiente!</p>
+                
+                <a class="button cta-button is-large" href="../src/views/login.php">
+                    <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                    <span>Fazer Login</span>
+                </a> &nbsp;&nbsp;
+
+                <a class="button cta-button is-large" href="../src/views/cadastro_estudante.php">
+                    <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                    <span>Criar Conta</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-foot">
+            <div class="container has-text-centered pb-6">
+                <i class="fas fa-chevron-down fa-2x floating" style="color: rgba(255,255,255,0.6);"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="section py-6">
+        <div class="container">
+            <h2 class="title section-title has-text-centered">Recursos do SPEX</h2>
+            <div class="columns is-multiline is-centered">
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Simulados Interativos</h3>
+                        <p class="has-text-grey">Pratique com questões de exames anteriores em um ambiente simulado que
+                            se adapta ao seu nível de conhecimento.</p>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Acompanhamento Inteligente</h3>
+                        <p class="has-text-grey">Nosso sistema analisa seu desempenho e identifica exatamente quais
+                            tópicos precisam de mais atenção.</p>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Comunidade Ativa</h3>
+                        <p class="has-text-grey">Conecte-se com outros estudantes, compartilhe materiais e resolva
+                            dúvidas em tempo real.</p>
+                    </div>
+                </div>
+
+                <!-- Additional features -->
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Métodos Científicos</h3>
+                        <p class="has-text-grey">Técnicas de aprendizagem baseadas em evidências para maximizar sua
+                            retenção de conteúdo.</p>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Acesso Multiplataforma</h3>
+                        <p class="has-text-grey">Estude onde e quando quiser, com sincronização perfeita entre
+                            dispositivos.</p>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="subtitle is-4">Gamificação</h3>
+                        <p class="has-text-grey">Sistema de recompensas e conquistas para manter você motivado durante
+                            os estudos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section py-6" style="background: #f9f9ff;">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-half">
+                    <h2 class="title is-2">Transforme sua maneira de estudar</h2>
+                    <p class="subtitle is-4 has-text-grey">Com o SPEX, você tem acesso a uma plataforma inteligente que
+                        se adapta ao seu ritmo de aprendizagem.</p>
+                    <div class="content">
+                        <ul>
+                            <li class="mb-3"><span class="icon has-text-primary"><i
+                                        class="fas fa-check-circle"></i></span> Banco com milhares de questões
+                                comentadas</li>
+                            <li class="mb-3"><span class="icon has-text-primary"><i
+                                        class="fas fa-check-circle"></i></span> Relatórios detalhados de desempenho</li>
+                            <li class="mb-3"><span class="icon has-text-primary"><i
+                                        class="fas fa-check-circle"></i></span> Planos de estudo personalizados</li>
+                            <li class="mb-3"><span class="icon has-text-primary"><i
+                                        class="fas fa-check-circle"></i></span> Simulados cronometrados</li>
+                        </ul>
+                    </div>
+                    <a class="button is-primary is-medium" href="#"
+                        style="background: var(--secondary-gradient); border: none;">
+                        <span class="icon"><i class="fas fa-rocket"></i></span>
+                        <span>Comece agora</span>
+                    </a>
+                </div>
+                <div class="column is-half">
+                    <figure class="image">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
+                            alt="Estudante usando plataforma digital" class="is-rounded"
+                            style="border-radius: 12px; box-shadow: var(--box-shadow);">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-one-third">
+                    <h3 class="title is-4 has-text-white">SPEX</h3>
+                    <p class="has-text-light">Sistema de Preparação para Exames</p>
+                    <div class="social-icons mt-4">
+                        <a class="icon has-text-light is-large" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="icon has-text-light is-large" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="icon has-text-light is-large" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="icon has-text-light is-large" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <h4 class="title is-5 has-text-white">Links Úteis</h4>
+                    <ul>
+                        <li><a class="has-text-light" href="#">Sobre nós</a></li>
+                        <li><a class="has-text-light" href="#">Planos</a></li>
+                        <li><a class="has-text-light" href="#">Blog</a></li>
+                        <li><a class="has-text-light" href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="column is-one-third">
+                    <h4 class="title is-5 has-text-white">Newsletter</h4>
+                    <p class="has-text-light mb-3">Assine para receber dicas de estudo e atualizações.</p>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="input" type="email" placeholder="Seu email">
+                        </div>
+                        <div class="control">
+                            <a class="button is-primary" style="background: var(--secondary-gradient); border: none;">
+                                <i class="fas fa-paper-plane"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="background-color: rgba(255,255,255,0.1);">
+            <div class="content has-text-centered">
+                <p class="has-text-light">
+                    <strong class="has-text-white">SPEX</strong> &copy; 2023 - Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Particle animation for hero section
+        document.addEventListener('DOMContentLoaded', function () {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+
+                // Random animation duration and delay
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animation = `float ${duration}s linear ${delay}s infinite`;
+
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+
+</html>

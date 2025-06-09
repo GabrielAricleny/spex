@@ -44,6 +44,7 @@ cp .env.example .env
    DB_PASSWORD=sua_senha
    ```
 
+<<<<<<< HEAD
 ## 2.5 Criação de Triggers (Regras de Integridade Adicionais)
 
 Após a criação da base de dados, execute o ficheiro `database/triggers.sql` para activar regras adicionais de integridade entre tabelas.
@@ -54,6 +55,9 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 
 
 ## 2.6 Rodando as migrações
+=======
+### 2.5 Rodando as migrações
+>>>>>>> f845488efedecbaf9c9e658ed0c9b39a6ea4a62c
 
 Execute o comando abaixo para criar as tabelas no banco de dados:
 
