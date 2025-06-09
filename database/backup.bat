@@ -51,6 +51,13 @@ if "%DB_DATABASE%"=="" (
     exit /b
 )
 
+if "%DB_PORT%"=="" (
+    echo [ERRO] A variavel "DB_PORT" nao foi definida corretamente no ".env".
+    echo.
+    pause
+    exit /b
+)
+
 :: Define o diretorio de backup
 set "DIRETORIO_BACKUP=.\backups"
 

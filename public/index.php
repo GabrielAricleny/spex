@@ -58,12 +58,20 @@ $roteador->adicionar(['POST'], 'autenticar_admin', fn() => (new ControladorLogin
 $roteador->adicionar(['GET'], 'sair_admin', fn() => (new ControladorLoginAdmin())->terminarSessao(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET'], 'painel_admin', fn() => (new ControladorPainelAdmin())->painel(), ['autenticadoAdmin']);
 
+// ==================================================
 // CRUDs principais do painel admin
-$roteador->adicionar(['GET', 'POST'], 'crud_nivel_acesso', fn() => (new ControladorNivelAcesso())->crud(), ['autenticadoAdmin']);
+// ==================================================
+// ==================== USUARIOS ====================
 $roteador->adicionar(['GET', 'POST'], 'crud_usuario', fn() => (new ControladorUsuario())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_administrador', fn() => (new ControladorAdministrador())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_estudante', fn() => (new ControladorEstudante())->crud(), ['autenticadoAdmin']);
 $roteador->adicionar(['GET', 'POST'], 'crud_curso', fn() => (new ControladorCurso())->crud(), ['autenticadoAdmin']);
+
+// ==================== NIVEIS DE ACESSO ====================
+$roteador->adicionar(['GET'], 'nivel_acesso_index', fn() => (new ControladorNivelAcesso())->index());
+$roteador->adicionar(['GET', 'POST'], 'nivel_acesso_criar', fn() => (new ControladorNivelAcesso())->criar());
+$roteador->adicionar(['GET', 'POST'], 'nivel_acesso_editar', fn() => (new ControladorNivelAcesso())->editar($_GET['id'] ?? null));
+$roteador->adicionar(['GET'], 'nivel_acesso_eliminar', fn() => (new ControladorNivelAcesso())->eliminar(isset($_GET['id']) ? (int)$_GET['id'] : null));
 
 // ==================== DISCIPLINAS ====================
 $roteador->adicionar(['GET'], 'disciplinas_listar', fn() => (new ControladorDisciplina())->listar(), ['autenticadoAdmin']);
@@ -139,9 +147,3 @@ $roteador->adicionar(['GET', 'POST'], 'lista_perguntas_exame_sistema_criar_aleat
 $rota = $_GET['rota'] ?? 'inicio';
 $roteador->despachar($rota);
 ?>
-<div style="width:100%; display:flex; justify-content:flex-end; margin-bottom:24px;">
-    <a href="?rota=exame_sistema_criar" class="button is-primary is-small">
-        <span class="icon"><i class="fas fa-plus"></i></span>
-        <span>Novo Exame</span>
-    </a>
-</div><?php

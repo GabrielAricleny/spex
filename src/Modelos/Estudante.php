@@ -12,11 +12,11 @@ class Estudante
     public $telefone;
     public $area_formacao;
     public $curso_pretendido;
+    public $criado_em;
+    public $actualizado_em;
     public $nome_completo;
     public $nome_usuario;
     public $email;
-    public $criado_em;
-    public $actualizado_em;
 
     protected static function getConexao()
     {
@@ -32,6 +32,8 @@ class Estudante
                     e.telefone,
                     e.area_formacao,
                     e.curso_pretendido,
+                    e.criado_em,
+                    e.actualizado_em,
                     u.nome_completo,
                     u.nome_usuario,
                     u.email
@@ -45,7 +47,17 @@ class Estudante
     public static function buscarPorId($id_usuario)
     {
         $pdo = self::getConexao();
-        $sql = "SELECT e.*, u.nome_completo, u.nome_usuario, u.email 
+        $sql = "SELECT 
+                    e.id_usuario,
+                    e.data_nasc,
+                    e.telefone,
+                    e.area_formacao,
+                    e.curso_pretendido,
+                    e.criado_em,
+                    e.actualizado_em,
+                    u.nome_completo,
+                    u.nome_usuario,
+                    u.email
                 FROM estudante e
                 JOIN usuario u ON e.id_usuario = u.id_usuario
                 WHERE e.id_usuario = :id_usuario";

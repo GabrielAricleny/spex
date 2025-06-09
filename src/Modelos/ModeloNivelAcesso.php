@@ -15,13 +15,13 @@ class NivelAcesso
 
     public function todos(): array
     {
-        $sql = "SELECT * FROM nivel_acesso ORDER BY id_nivel DESC";
+        $sql = "SELECT id_nivel, descricao FROM nivel_acesso ORDER BY id_nivel DESC";
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function encontrar(int $id): ?array
     {
-        $sql = "SELECT * FROM nivel_acesso WHERE id_nivel = ?";
+        $sql = "SELECT id_nivel, descricao FROM nivel_acesso WHERE id_nivel = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);

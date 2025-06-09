@@ -103,7 +103,7 @@ body, html {
                             <button class="button is-success" type="submit">Salvar</button>
                         </div>
                         <div class="control">
-                            <a class="button is-light" href="?rota=crud_nivel_acesso">Cancelar</a>
+                            <a class="button is-light" href="?rota=nivel_acesso_index">Cancelar</a>
                         </div>
                     </div>
                 </form>

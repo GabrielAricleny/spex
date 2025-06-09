@@ -10,7 +10,7 @@ body, html {
     background: #23272b;
     border-radius: 12px;
     padding: 32px 24px;
-    max-width: 100%;
+    max-width: 1200px;
     margin: 32px auto;
     box-shadow: 0 2px 16px rgba(0,0,0,0.15);
     box-sizing: border-box;
@@ -18,7 +18,7 @@ body, html {
 @media (min-width: 1200px) {
     .painel-admin-container {
         margin-left: 260px;
-        max-width: 1600px;
+        max-width: 1200px;
         padding-right: 32px;
         padding-left: 32px;
         margin-right: auto;
@@ -49,7 +49,7 @@ body, html {
 }
 .table.is-striped.is-hoverable.is-fullwidth {
     width: 100%;
-    min-width: 1100px;
+    min-width: 1000px;
     background: transparent;
     border-radius: 6px;
     overflow: hidden;
@@ -108,43 +108,51 @@ h2, .title.has-text-centered {
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
-                            <th style="width: 80px;">ID</th>
-                            <th>Nome Completo</th>
-                            <th>Nome de Utilizador</th>
-                            <th>Email</th>
+                            <th>ID</th>
                             <th>Data de Nascimento</th>
                             <th>Telefone</th>
                             <th>Área de Formação</th>
                             <th>Curso Pretendido</th>
-                            <th style="width: 90px;">Editar</th>
-                            <th style="width: 90px;">Eliminar</th>
+                            <th>Criado em</th>
+                            <th>Actualizado em</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($estudantes as $estudante): ?>
+                        <?php if (!empty($estudantes)): ?>
+                            <?php foreach ($estudantes as $estudante): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($estudante->id_usuario ?? '') ?></td>
+                                    <td><?= htmlspecialchars($estudante->data_nasc ?? '') ?></td>
+                                    <td><?= htmlspecialchars($estudante->telefone ?? '') ?></td>
+                                    <td>
+                                        <?= htmlspecialchars($estudante->nome_area_formacao ?? $estudante->area_formacao ?? '') ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($estudante->nome_curso_pretendido ?? $estudante->curso_pretendido ?? '') ?>
+                                    </td>
+                                    <td><?= htmlspecialchars($estudante->criado_em ?? '') ?></td>
+                                    <td><?= htmlspecialchars($estudante->actualizado_em ?? '') ?></td>
+                                    <td>
+                                        <a href="?rota=crud_estudante&acao=editar&id=<?= $estudante->id_usuario ?>" class="button is-warning is-small">
+                                            <span class="icon"><i class="fas fa-edit"></i></span>
+                                            <span>Editar</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="?rota=crud_estudante&acao=eliminar&id=<?= $estudante->id_usuario ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar este estudante?')">
+                                            <span class="icon"><i class="fas fa-trash"></i></span>
+                                            <span>Eliminar</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
                             <tr>
-                                <td><?= htmlspecialchars($estudante->id_usuario ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->nome_completo ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->nome_usuario ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->email ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->data_nasc ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->telefone ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->area_formacao ?? '') ?></td>
-                                <td><?= htmlspecialchars($estudante->curso_pretendido ?? '') ?></td>
-                                <td>
-                                    <a href="?rota=crud_estudante&acao=editar&id=<?= $estudante->id_usuario ?>" class="button is-warning is-small">
-                                        <span class="icon"><i class="fas fa-edit"></i></span>
-                                        <span>Editar</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="?rota=crud_estudante&acao=eliminar&id=<?= $estudante->id_usuario ?>" class="button is-danger is-small" onclick="return confirm('Tem a certeza que pretende eliminar este estudante?')">
-                                        <span class="icon"><i class="fas fa-trash"></i></span>
-                                        <span>Eliminar</span>
-                                    </a>
-                                </td>
+                                <td colspan="9" class="has-text-centered">Nenhum estudante encontrado.</td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

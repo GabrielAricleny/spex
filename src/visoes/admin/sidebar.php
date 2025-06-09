@@ -90,7 +90,7 @@ body, html {
         <?php
         // Rotas específicas para cada tabela, igual ao painel_admin.php
         $rotas = [
-            'nivel_acesso' => 'crud_nivel_acesso',
+            'nivel_acesso' => 'nivel_acesso_index',
             'usuario' => 'crud_usuario',
             'administrador' => 'crud_administrador',
             'estudante' => 'crud_estudante',
@@ -98,7 +98,7 @@ body, html {
             'exame_sistema' => 'exame_sistema_listar',
             'exame_universidade' => 'exame_universidade_listar',
             'universidade' => 'universidades_listar',
-            'disciplina' => 'disciplina_listar',
+            'disciplina' => 'disciplinas_listar',
             'disciplina_curso' => 'disciplina_curso_listar',
             'tema' => 'tema_listar',
             'status_pergunta' => 'status_pergunta_listar',
@@ -128,4 +128,4 @@ body, html {
             Voltar ao Painel Admin
         </a>
     </nav>
-</div></a>
+</div>
