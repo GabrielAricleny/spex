@@ -1,6 +1,7 @@
 # 🔒 Arquivos Sensíveis
 .env
 mysql_conn.session.sql
+mysql_remoto.session.sql
 
 # 📂 Configurações do Editor (VS Code, JetBrains, etc.)
 .vscode/
@@ -15,5 +16,5 @@ tmp/
 # 📂 Diretórios Específicos do SPEX
 public/css/bulma
 public/css/fontawesome
-public/uploads/  # Evita enviar arquivos de usuários
-temp_docs/
+public/uploads/
+docs/temp_docs/

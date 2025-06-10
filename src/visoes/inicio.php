@@ -5,6 +5,7 @@
 $utilizadorLogado = $_SESSION['utilizador'] ?? null;
 $nomeUtilizador   = $utilizadorLogado['nome_completo'] ?? '';
 $nivelAcesso      = $utilizadorLogado['nivel_acesso'] ?? null;
+$paginaJs         = ['particulas'];
 
 require_once __DIR__ . '/templates/cabecalho.php';
 ?>
